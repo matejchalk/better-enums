@@ -1,6 +1,11 @@
+import { expectTypeTestsToPassAsync } from 'jest-tsd';
 import { $enum, ValueOf } from '../src';
 
 describe('$enum', () => {
+  test('TSD static type checks', async () => {
+    await expectTypeTestsToPassAsync(__filename);
+  });
+
   describe('basic enum', () => {
     const ROLE = $enum(['viewer', 'editor', 'owner']);
     type Role = ValueOf<typeof ROLE>;
@@ -24,96 +29,88 @@ describe('$enum', () => {
   });
 
   describe('labeled enum', () => {
-    const BOOKING_STATUS = $enum({
-      missingConfirmation: 'chybí potvrzení',
-      awaitingPayment: 'čeká se na platbu',
-      complete: 'zaplaceno',
+    const LANGUAGE = $enum({
+      en: 'English',
+      cs: 'Čeština',
+      es: 'Español',
     });
-    type BookingStatus = ValueOf<typeof BOOKING_STATUS>;
+    type Language = ValueOf<typeof LANGUAGE>;
 
     test('values', () => {
-      expect(BOOKING_STATUS.values()).toEqual<BookingStatus[]>([
-        'chybí potvrzení',
-        'čeká se na platbu',
-        'zaplaceno',
+      expect(LANGUAGE.values()).toEqual<Language[]>([
+        'English',
+        'Čeština',
+        'Español',
       ]);
     });
 
     test('isValue', () => {
-      expect(BOOKING_STATUS.isValue('zaplaceno')).toBe(true);
+      expect(LANGUAGE.isValue('Español')).toBe(true);
     });
 
     test('assertValue', () => {
-      expect(() => BOOKING_STATUS.assertValue('zaplaceno')).not.toThrowError();
+      expect(() => LANGUAGE.assertValue('Español')).not.toThrowError();
     });
 
     test('keys', () => {
-      expect(BOOKING_STATUS.keys()).toEqual<
-        ReturnType<(typeof BOOKING_STATUS)['keys']>
-      >(['missingConfirmation', 'awaitingPayment', 'complete']);
+      expect(LANGUAGE.keys()).toEqual<ReturnType<(typeof LANGUAGE)['keys']>>([
+        'en',
+        'cs',
+        'es',
+      ]);
     });
 
     test('isKey', () => {
-      expect(BOOKING_STATUS.isKey('awaitingPayment')).toBe(true);
-      expect(BOOKING_STATUS.isKey('zaplaceno')).toBe(false);
+      expect(LANGUAGE.isKey('cs')).toBe(true);
+      expect(LANGUAGE.isKey('Español')).toBe(false);
     });
 
     test('assertKey', () => {
-      expect(() => BOOKING_STATUS.assertKey('complete')).not.toThrowError();
-      expect(() => BOOKING_STATUS.assertKey(undefined)).toThrowError(
-        `Enum key out of range (received undefined, expected one of: "missingConfirmation", "awaitingPayment", "complete")`
+      expect(() => LANGUAGE.assertKey('es')).not.toThrowError();
+      expect(() => LANGUAGE.assertKey(undefined)).toThrowError(
+        `Enum key out of range (received undefined, expected one of: "en", "cs", "es")`
       );
     });
 
     test('entries', () => {
-      expect(BOOKING_STATUS.entries()).toEqual<
-        ReturnType<(typeof BOOKING_STATUS)['entries']>
+      expect(LANGUAGE.entries()).toEqual<
+        ReturnType<(typeof LANGUAGE)['entries']>
       >([
-        ['missingConfirmation', 'chybí potvrzení'],
-        ['awaitingPayment', 'čeká se na platbu'],
-        ['complete', 'zaplaceno'],
+        ['en', 'English'],
+        ['cs', 'Čeština'],
+        ['es', 'Español'],
       ]);
     });
 
     test('isEntry', () => {
-      expect(BOOKING_STATUS.isEntry(['awaitingPayment', 'zaplaceno'])).toBe(
-        false
-      );
-      expect(BOOKING_STATUS.isEntry(['complete', 'zaplaceno'])).toBe(true);
+      expect(LANGUAGE.isEntry(['cs', 'Español'])).toBe(false);
+      expect(LANGUAGE.isEntry(['es', 'Español'])).toBe(true);
     });
 
     test('assertEntry', () => {
-      expect(() =>
-        BOOKING_STATUS.assertEntry(['missingConfirmation', 'chybí potvrzení'])
-      ).not.toThrowError();
-      expect(() =>
-        BOOKING_STATUS.assertEntry(['paid', 'zaplaceno'])
-      ).toThrowError(
-        'Enum key out of range (received "paid", expected one of: "missingConfirmation", "awaitingPayment", "complete")'
+      expect(() => LANGUAGE.assertEntry(['en', 'English'])).not.toThrowError();
+      expect(() => LANGUAGE.assertEntry(['de', 'Español'])).toThrowError(
+        'Enum key out of range (received "de", expected one of: "en", "cs", "es")'
       );
-      expect(() =>
-        BOOKING_STATUS.assertEntry(['awaitingPayment', 'zaplaceno'])
-      ).toThrowError(
-        'Enum key and value don\'t match (expected ["awaitingPayment", "čeká se na platbu"] or ["complete", "zaplaceno"])'
+      expect(() => LANGUAGE.assertEntry(['cs', 'Español'])).toThrowError(
+        'Enum key and value don\'t match (expected ["cs", "Čeština"] or ["es", "Español"])'
       );
-      expect(() => BOOKING_STATUS.assertEntry(['complete'])).toThrowError(
+      expect(() => LANGUAGE.assertEntry(['es'])).toThrowError(
         'Enum entry must be a tuple (e.g. ["key", "value"])'
       );
     });
 
     test('obj', () => {
-      expect(BOOKING_STATUS.obj).toEqual({
-        missingConfirmation: 'chybí potvrzení',
-        awaitingPayment: 'čeká se na platbu',
-        complete: 'zaplaceno',
+      expect(LANGUAGE.obj).toEqual({
+        en: 'English',
+        cs: 'Čeština',
+        es: 'Español',
       });
     });
 
     test('keyOf', () => {
-      expect(BOOKING_STATUS.keyOf('chybí potvrzení')).toBe(
-        'missingConfirmation'
-      );
-      expect(BOOKING_STATUS.keyOf('zaplaceno')).toBe('complete');
+      expect(LANGUAGE.keyOf('English')).toBe('en');
+      expect(LANGUAGE.keyOf('Español')).toBe('es');
     });
   });
 

@@ -1,2 +1,2 @@
 export { $enum } from './enum';
-export { ValueOf } from './types';
+export { ValueOf, BasicEnum, LabeledEnum } from './types';
