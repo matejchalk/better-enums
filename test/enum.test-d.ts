@@ -1,5 +1,5 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { $enum, BasicEnum, ValueOf } from '../src';
+import { $enum, BasicEnum, KeyOf, ValueOf } from '../src';
 
 test('basic enum', () => {
   const ROLE = $enum(['viewer', 'editor', 'owner']);
@@ -37,6 +37,10 @@ test('advanced enum', () => {
     expectType<'English' | 'Čeština' | 'Español'>(language);
   };
 
+  void function (label: KeyOf<typeof LANGUAGE>) {
+    expectType<'en' | 'cs' | 'es'>(label);
+  };
+
   expectType<readonly ('English' | 'Čeština' | 'Español')[]>(LANGUAGE.values());
 
   expectType<
@@ -54,8 +58,7 @@ test('advanced enum', () => {
     expectType<'English' | 'Čeština' | 'Español'>(value);
   });
 
-  // FIXME
-  // expectType<'es'>(LANGUAGE.keyOf('Español'));
+  expectType<'es'>(LANGUAGE.keyOf('Español'));
 });
 
 test('from TypeScript string enum', () => {

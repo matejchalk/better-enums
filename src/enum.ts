@@ -52,6 +52,6 @@ function labeledEnum<const T extends Record<string, string | number>>(
     entries: () => Object.entries(obj) as any,
     ...createEntryGuards(obj, objInverted),
     obj: Object.freeze(obj),
-    keyOf: value => objInverted[value],
+    keyOf: value => objInverted[value] as any,
   };
 }
