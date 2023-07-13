@@ -1,2 +1,2 @@
-// TODO
-export function $enum() {}
+export { $enum } from './enum';
+export { ValueOf } from './types';
