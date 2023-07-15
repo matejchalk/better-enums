@@ -1,9 +1,9 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { $enum, BasicEnum, KeyOf, ValueOf } from '../src';
+import { $enum, BasicEnum, InferKey, InferValue } from '../src';
 
 test('basic enum', () => {
   const ROLE = $enum(['viewer', 'editor', 'owner']);
-  type Role = ValueOf<typeof ROLE>;
+  type Role = InferValue<typeof ROLE>;
 
   void function (role: Role) {
     expectType<'viewer' | 'editor' | 'owner'>(role);
@@ -30,14 +30,14 @@ test('advanced enum', () => {
     cs: 'Čeština',
     es: 'Español',
   });
-  type Language = ValueOf<typeof LANGUAGE>;
-  const Language = LANGUAGE.obj;
+  type Language = InferValue<typeof LANGUAGE>;
+  const Language = LANGUAGE.object;
 
   void function (language: Language) {
     expectType<'English' | 'Čeština' | 'Español'>(language);
   };
 
-  void function (label: KeyOf<typeof LANGUAGE>) {
+  void function (label: InferKey<typeof LANGUAGE>) {
     expectType<'en' | 'cs' | 'es'>(label);
   };
 
@@ -68,7 +68,7 @@ test('from TypeScript string enum', () => {
   }
 
   const ACTION = $enum(ActionEnum);
-  type Action = ValueOf<typeof ACTION>;
+  type Action = InferValue<typeof ACTION>;
 
   void function (action: Action) {
     expectType<'allow' | 'block'>(action);
@@ -93,7 +93,7 @@ test('from TypeScript number enum', () => {
   }
 
   const LEVEL = $enum(LevelEnum);
-  type Level = ValueOf<typeof LEVEL>;
+  type Level = InferValue<typeof LEVEL>;
 
   void function (level: 1) {
     expectAssignable<Level>(level);

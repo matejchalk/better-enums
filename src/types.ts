@@ -12,15 +12,15 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
     entries: () => readonly (readonly [keyof T, T[keyof T]])[];
     isEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
     assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
-    obj: T;
+    object: T;
     keyOf: <V extends EnumToUnion<T[keyof T]>>(value: V) => Invert<T>[V];
   };
 
-export type ValueOf<T extends BasicEnum<string | number>> = EnumToUnion<
+export type InferValue<T extends BasicEnum<string | number>> = EnumToUnion<
   ReturnType<T['values']>[number]
 >;
 
-export type KeyOf<T extends LabeledEnum<Record<string, string | number>>> =
+export type InferKey<T extends LabeledEnum<Record<string, string | number>>> =
   EnumToUnion<ReturnType<T['keys']>[number]>;
 
 export type EnumToUnion<T extends string | number> = T extends string

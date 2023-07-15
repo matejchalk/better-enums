@@ -3,7 +3,7 @@ import {
   createKeyGuards,
   createValueGuards,
 } from './guards';
-import { BasicEnum, LabeledEnum } from './types';
+import type { BasicEnum, LabeledEnum } from './types';
 
 export function $enum<T extends string | number>(values: T[]): BasicEnum<T>;
 
@@ -51,7 +51,7 @@ function labeledEnum<const T extends Record<string, string | number>>(
     ...createKeyGuards(Object.keys(obj)),
     entries: () => Object.entries(obj) as any,
     ...createEntryGuards(obj, objInverted),
-    obj: Object.freeze(obj),
+    object: Object.freeze(obj),
     keyOf: value => objInverted[value] as any,
   };
 }

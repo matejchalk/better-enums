@@ -1,5 +1,5 @@
 import { expectTypeTestsToPassAsync } from 'jest-tsd';
-import { $enum, ValueOf } from '../src';
+import { $enum, InferValue } from '../src';
 
 describe('$enum', () => {
   test('TSD static type checks', async () => {
@@ -8,7 +8,7 @@ describe('$enum', () => {
 
   describe('basic enum', () => {
     const ROLE = $enum(['viewer', 'editor', 'owner']);
-    type Role = ValueOf<typeof ROLE>;
+    type Role = InferValue<typeof ROLE>;
 
     test('values', () => {
       expect(ROLE.values()).toEqual<Role[]>(['viewer', 'editor', 'owner']);
@@ -34,7 +34,7 @@ describe('$enum', () => {
       cs: 'Čeština',
       es: 'Español',
     });
-    type Language = ValueOf<typeof LANGUAGE>;
+    type Language = InferValue<typeof LANGUAGE>;
 
     test('values', () => {
       expect(LANGUAGE.values()).toEqual<Language[]>([
@@ -101,7 +101,7 @@ describe('$enum', () => {
     });
 
     test('obj', () => {
-      expect(LANGUAGE.obj).toEqual({
+      expect(LANGUAGE.object).toEqual({
         en: 'English',
         cs: 'Čeština',
         es: 'Español',
@@ -122,7 +122,7 @@ describe('$enum', () => {
     const ACTION = $enum(Action);
 
     test('values', () => {
-      expect(ACTION.values()).toEqual<ValueOf<typeof ACTION>[]>([
+      expect(ACTION.values()).toEqual<InferValue<typeof ACTION>[]>([
         'allow',
         'block',
       ]);
@@ -153,8 +153,8 @@ describe('$enum', () => {
       ]);
     });
 
-    test('obj', () => {
-      expect(ACTION.obj).toEqual({
+    test('object', () => {
+      expect(ACTION.object).toEqual({
         Allow: 'allow',
         Block: 'block',
       });
