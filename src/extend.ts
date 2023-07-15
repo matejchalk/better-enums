@@ -1,5 +1,5 @@
 import { $enum } from './enum';
-import { BasicEnum, InferValue, LabeledEnum, Prettify } from './types';
+import type { BasicEnum, InferValue, LabeledEnum, Prettify } from './types';
 
 export function $extend<
   TEnum extends BasicEnum<string | number>,
