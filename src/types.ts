@@ -30,3 +30,7 @@ export type EnumToUnion<T extends string | number> = T extends string
 type Invert<T extends Record<PropertyKey, PropertyKey>> = {
   [K in keyof T as T[K]]: K;
 };
+
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};

@@ -24,7 +24,7 @@ test('basic enum', () => {
   };
 });
 
-test('advanced enum', () => {
+test('labeled enum', () => {
   const LANGUAGE = $enum({
     en: 'English',
     cs: 'Čeština',
