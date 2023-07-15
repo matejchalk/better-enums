@@ -1,15 +1,15 @@
 export type BasicEnum<T extends string | number> = {
-  values: () => readonly T[];
+  values: () => T[];
   isValue: (value: unknown) => value is T;
   assertValue: (value: unknown) => asserts value is T;
 };
 
 export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
   BasicEnum<T[keyof T]> & {
-    keys: () => readonly (keyof T)[];
+    keys: () => (keyof T)[];
     isKey: (key: unknown) => key is keyof T;
     assertKey: (key: unknown) => asserts key is keyof T;
-    entries: () => readonly (readonly [keyof T, T[keyof T]])[];
+    entries: () => [keyof T, T[keyof T]][];
     isEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
     assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
     object: T;
@@ -27,7 +27,7 @@ export type EnumToUnion<T extends string | number> = T extends string
   ? `${T}`
   : T;
 
-type Invert<T extends Record<PropertyKey, PropertyKey>> = {
+export type Invert<T extends Record<PropertyKey, PropertyKey>> = {
   [K in keyof T as T[K]]: K;
 };
 

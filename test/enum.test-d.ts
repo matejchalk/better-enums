@@ -9,7 +9,7 @@ test('basic enum', () => {
     expectType<'viewer' | 'editor' | 'owner'>(role);
   };
 
-  expectType<readonly ('viewer' | 'editor' | 'owner')[]>(ROLE.values());
+  expectType<('viewer' | 'editor' | 'owner')[]>(ROLE.values());
 
   void function (possibleRole: string) {
     expectNotAssignable<Role>(possibleRole);
@@ -41,7 +41,7 @@ test('labeled enum', () => {
     expectType<'en' | 'cs' | 'es'>(label);
   };
 
-  expectType<readonly ('English' | 'Čeština' | 'Español')[]>(LANGUAGE.values());
+  expectType<('English' | 'Čeština' | 'Español')[]>(LANGUAGE.values());
 
   expectType<
     Readonly<{
