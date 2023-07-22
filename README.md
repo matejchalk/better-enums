@@ -290,4 +290,5 @@ const ROLE = Enum({
 
 - install dependencies using `npm install`,
 - run tests (written with Jest and TSD) using `npm test`,
-- build library using `npm run build`.
+- build library using `npm run build`,
+- generate documentation (with TypeDoc) using `npm run docs`.
