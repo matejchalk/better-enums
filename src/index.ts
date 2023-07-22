@@ -1,7 +1,7 @@
 export { Enum } from './enum';
 export type {
   BasicEnum,
-  BetterEnum,
+  IEnum,
   InferKey,
   InferValue,
   LabeledEnum,

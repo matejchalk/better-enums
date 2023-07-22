@@ -16,6 +16,10 @@
 <li><a href="BasicEnum.html">BasicEnum</a></li></ul>
 <h1>Type alias BasicEnum&lt;T&gt;</h1></div>
 <div class="tsd-signature"><span class="tsd-kind-type-alias">Basic<wbr/>Enum</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">assertValue</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-symbol">asserts </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">hasValue</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">values</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Enum object created from a list of values.</p>
+<p>A basic enum is more similar to a union than a built-in <code>enum</code>.
+Unlike a <a href="LabeledEnum.html" class="tsd-kind-type-alias">LabeledEnum</a>, no keys are defined for accessing values.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -31,12 +35,21 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="__type.assertValue.__type-1.__type-2"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">asserts </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Checks if value is contained in enum&#39;s set of values.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">unknown</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">asserts </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4></li></ul></li></ul></li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography"><p>Value with unknown type.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">asserts </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4><p>Nothing if valid enum value, throws error if invalid.</p>
+
+<div class="tsd-comment tsd-typography">
+<h4>Throws</h4><p><code>RangeError</code></p>
+</div></li></ul></li></ul></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">has<wbr/>Value</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">)</span></h5>
 <ul class="tsd-parameters">
@@ -44,12 +57,19 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="__type.hasValue.__type-3.__type-4"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Checks if value is contained in enum&#39;s set of values.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">unknown</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4></li></ul></li></ul></li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography"><p>Value with unknown type.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4><p>Boolean (<code>true</code> if valid enum value, otherwise <code>false</code>).</p>
+
+<div class="tsd-comment tsd-typography"></div></li></ul></li></ul></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">values</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span></h5>
 <ul class="tsd-parameters">
@@ -57,9 +77,14 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="__type.values.__type-5.__type-6"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span></h4></li></ul></li></ul></li></ul></div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Lists all values.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span></h4><p>Array of values (safe to mutate).</p>
+
+<div class="tsd-comment tsd-typography"></div></li></ul></li></ul></li></ul></div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/9435d77/src/types.ts#L47">types.ts:47</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/8db6d67/src/types.ts#L140">types.ts:140</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -78,7 +103,7 @@
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>better-<wbr/>enums</span></a>
 <ul class="tsd-small-nested-navigation">
-<li><a href="../interfaces/BetterEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>Better<wbr/>Enum</span></a></li>
+<li><a href="../interfaces/IEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>IEnum</span></a></li>
 <li><a href="BasicEnum.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg><span>Basic<wbr/>Enum</span></a></li>
 <li><a href="InferKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Infer<wbr/>Key</span></a></li>
 <li><a href="InferValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Infer<wbr/>Value</span></a></li>

@@ -64,7 +64,7 @@ const ROLE = Enum(['viewer', 'editor', 'admin']);
 type Role = InferValue<typeof ROLE>;
 ```
 
-Then you can use the inferred types in your type definitions:
+Then you can use the inferred type in your type definitions:
 
 ```ts
 type User = {
@@ -73,7 +73,7 @@ type User = {
 };
 ```
 
-The advantage of creating the enum object is that you may also use runtime features:
+The enum object enables you to use runtime features:
 
 - list all values with `.values()`:
 
@@ -284,7 +284,7 @@ const ROLE = Enum({
 */
 ```
 
-(For numeric enums, the `Enum` function takes care of excluding the reverse mapping in the underlying runtime representation TypeScript creates. E.g. `.keys()` will only include keys and `.values()` will include values, unlike if you called `Object.keys` or `Object.values` on the original `enum`.)
+For numeric enums, the `Enum` function takes care of excluding the reverse mapping in the underlying runtime representation TypeScript creates. E.g. `.keys()` will only include keys and `.values()` will include values, unlike if you called `Object.keys` or `Object.values` on the original `enum`.
 
 ## Contributing
 

@@ -19,6 +19,8 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="Enum"><span class="tsd-kind-call-signature">Enum</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#Enum" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a basic enum from an array of values.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -28,12 +30,22 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">values</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">values</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Array of all values.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Basic enum object.</p>
+
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">ROLE</span><span class="hl-1"> = </span><span class="hl-0">Enum</span><span class="hl-1">([</span><span class="hl-2">&#39;viewer&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;editor&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;owner&#39;</span><span class="hl-1">]);</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/9435d77/src/types.ts#L2">types.ts:2</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/8db6d67/src/types.ts#L21">types.ts:21</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="Enum-1"><span class="tsd-kind-call-signature">Enum</span><span class="tsd-signature-symbol">&lt;</span>const <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">obj</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/LabeledEnum.html" class="tsd-signature-type tsd-kind-type-alias">LabeledEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#Enum-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a labeled enum from an object.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -43,10 +55,18 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">obj</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/LabeledEnum.html" class="tsd-signature-type tsd-kind-type-alias">LabeledEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">obj</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h5>
+<div class="tsd-comment tsd-typography"><p>Object mapping keys to values.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/LabeledEnum.html" class="tsd-signature-type tsd-kind-type-alias">LabeledEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Labeled enum object.</p>
+
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">LANGUAGE</span><span class="hl-1"> = </span><span class="hl-0">Enum</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-4">English:</span><span class="hl-1"> </span><span class="hl-2">&#39;English&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">Czech:</span><span class="hl-1"> </span><span class="hl-2">&#39;Čeština&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">Slovak:</span><span class="hl-1"> </span><span class="hl-2">&#39;Slovenčina&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/9435d77/src/types.ts#L4">types.ts:4</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/8db6d67/src/types.ts#L36">types.ts:36</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -65,7 +85,7 @@
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>better-<wbr/>enums</span></a>
 <ul class="tsd-small-nested-navigation">
-<li><a href="../interfaces/BetterEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>Better<wbr/>Enum</span></a></li>
+<li><a href="../interfaces/IEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>IEnum</span></a></li>
 <li><a href="../types/BasicEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg><span>Basic<wbr/>Enum</span></a></li>
 <li><a href="../types/InferKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Infer<wbr/>Key</span></a></li>
 <li><a href="../types/InferValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Infer<wbr/>Value</span></a></li>
