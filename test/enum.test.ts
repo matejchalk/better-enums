@@ -14,10 +14,10 @@ describe('Enum', () => {
       expect(ROLE.values()).toEqual<Role[]>(['viewer', 'editor', 'owner']);
     });
 
-    test('isValue', () => {
-      expect(ROLE.isValue('editor')).toBe(true);
-      expect(ROLE.isValue('admin')).toBe(false);
-      expect(ROLE.isValue(null)).toBe(false);
+    test('hasValue', () => {
+      expect(ROLE.hasValue('editor')).toBe(true);
+      expect(ROLE.hasValue('admin')).toBe(false);
+      expect(ROLE.hasValue(null)).toBe(false);
     });
 
     test('assertValue', () => {
@@ -44,8 +44,8 @@ describe('Enum', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(LANGUAGE.isValue('Español')).toBe(true);
+    test('hasValue', () => {
+      expect(LANGUAGE.hasValue('Español')).toBe(true);
     });
 
     test('assertValue', () => {
@@ -60,9 +60,9 @@ describe('Enum', () => {
       ]);
     });
 
-    test('isKey', () => {
-      expect(LANGUAGE.isKey('cs')).toBe(true);
-      expect(LANGUAGE.isKey('Español')).toBe(false);
+    test('hasKey', () => {
+      expect(LANGUAGE.hasKey('cs')).toBe(true);
+      expect(LANGUAGE.hasKey('Español')).toBe(false);
     });
 
     test('assertKey', () => {
@@ -82,9 +82,9 @@ describe('Enum', () => {
       ]);
     });
 
-    test('isEntry', () => {
-      expect(LANGUAGE.isEntry(['cs', 'Español'])).toBe(false);
-      expect(LANGUAGE.isEntry(['es', 'Español'])).toBe(true);
+    test('hasEntry', () => {
+      expect(LANGUAGE.hasEntry(['cs', 'Español'])).toBe(false);
+      expect(LANGUAGE.hasEntry(['es', 'Español'])).toBe(true);
     });
 
     test('assertEntry', () => {
@@ -128,10 +128,10 @@ describe('Enum', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(ACTION.isValue(Action.Block)).toBe(true);
-      expect(ACTION.isValue('block')).toBe(true);
-      expect(ACTION.isValue('Block')).toBe(false);
+    test('hasValue', () => {
+      expect(ACTION.hasValue(Action.Block)).toBe(true);
+      expect(ACTION.hasValue('block')).toBe(true);
+      expect(ACTION.hasValue('Block')).toBe(false);
     });
 
     test('keys', () => {
@@ -141,9 +141,9 @@ describe('Enum', () => {
       ]);
     });
 
-    test('isKey', () => {
-      expect(ACTION.isKey('Allow')).toBe(true);
-      expect(ACTION.isKey('allow')).toBe(false);
+    test('hasKey', () => {
+      expect(ACTION.hasKey('Allow')).toBe(true);
+      expect(ACTION.hasKey('allow')).toBe(false);
     });
 
     test('entries', () => {
@@ -178,11 +178,11 @@ describe('Enum', () => {
       expect(LEVEL.values()).toEqual<Level[]>([0, 1, 2]);
     });
 
-    test('isValue', () => {
-      expect(LEVEL.isValue(Level.warn)).toBe(true);
-      expect(LEVEL.isValue('warn')).toBe(false);
-      expect(LEVEL.isValue(1)).toBe(true);
-      expect(LEVEL.isValue(3)).toBe(false);
+    test('hasValue', () => {
+      expect(LEVEL.hasValue(Level.warn)).toBe(true);
+      expect(LEVEL.hasValue('warn')).toBe(false);
+      expect(LEVEL.hasValue(1)).toBe(true);
+      expect(LEVEL.hasValue(3)).toBe(false);
     });
 
     test('keys', () => {

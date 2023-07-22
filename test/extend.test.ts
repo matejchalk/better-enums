@@ -19,10 +19,10 @@ describe('Enum.extend', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(INFECTED_STATUS.isValue('alive')).toBe(true);
-      expect(INFECTED_STATUS.isValue('zombie')).toBe(true);
-      expect(INFECTED_STATUS.isValue('werewolf')).toBe(false);
+    test('hasValue', () => {
+      expect(INFECTED_STATUS.hasValue('alive')).toBe(true);
+      expect(INFECTED_STATUS.hasValue('zombie')).toBe(true);
+      expect(INFECTED_STATUS.hasValue('werewolf')).toBe(false);
     });
 
     test('assertValue', () => {
@@ -47,9 +47,9 @@ describe('Enum.extend', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(EXTENDED_LOCALE.isValue('de')).toBe(true);
-      expect(EXTENDED_LOCALE.isValue(undefined)).toBe(false);
+    test('hasValue', () => {
+      expect(EXTENDED_LOCALE.hasValue('de')).toBe(true);
+      expect(EXTENDED_LOCALE.hasValue(undefined)).toBe(false);
     });
 
     test('assertValue', () => {
@@ -65,9 +65,9 @@ describe('Enum.extend', () => {
       >(['English', 'Czech', 'Slovak', 'German']);
     });
 
-    test('isKey', () => {
-      expect(EXTENDED_LOCALE.isKey('German')).toBe(true);
-      expect(EXTENDED_LOCALE.isKey('de')).toBe(false);
+    test('hasKey', () => {
+      expect(EXTENDED_LOCALE.hasKey('German')).toBe(true);
+      expect(EXTENDED_LOCALE.hasKey('de')).toBe(false);
     });
 
     test('assertKey', () => {
@@ -88,9 +88,9 @@ describe('Enum.extend', () => {
       ]);
     });
 
-    test('isEntry', () => {
-      expect(EXTENDED_LOCALE.isEntry(['German', 'de'])).toBe(true);
-      expect(EXTENDED_LOCALE.isEntry('de')).toBe(false);
+    test('hasEntry', () => {
+      expect(EXTENDED_LOCALE.hasEntry(['German', 'de'])).toBe(true);
+      expect(EXTENDED_LOCALE.hasEntry('de')).toBe(false);
     });
 
     test('assertEntry', () => {
@@ -127,7 +127,7 @@ describe('Enum.extend', () => {
     test('no additional properties', () => {
       expect(EXTENDED_LOCALE).toEqual<typeof EXTENDED_LOCALE>({
         values: expect.any(Function),
-        isValue: expect.any(Function),
+        hasValue: expect.any(Function),
         assertValue: expect.any(Function),
       });
     });
@@ -141,8 +141,8 @@ describe('Enum.extend', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(EXTENDED_LOCALE.isValue('de')).toBe(true);
+    test('hasValue', () => {
+      expect(EXTENDED_LOCALE.hasValue('de')).toBe(true);
     });
 
     test('assertValue', () => {

@@ -15,7 +15,7 @@ test('basic enum', () => {
   expectType<('alive' | 'dead' | 'zombie')[]>(INFECTED_STATUS.values());
 
   void function (status: 'zombie' | 'werewolf') {
-    if (INFECTED_STATUS.isValue(status)) {
+    if (INFECTED_STATUS.hasValue(status)) {
       expectType<'zombie'>(status);
     }
   };

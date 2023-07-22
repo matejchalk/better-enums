@@ -46,17 +46,17 @@ export interface BetterEnum {
 
 export type BasicEnum<T extends string | number> = {
   values: () => T[];
-  isValue: (value: unknown) => value is T;
+  hasValue: (value: unknown) => value is T;
   assertValue: (value: unknown) => asserts value is T;
 };
 
 export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
   BasicEnum<T[keyof T]> & {
     keys: () => (keyof T)[];
-    isKey: (key: unknown) => key is keyof T;
+    hasKey: (key: unknown) => key is keyof T;
     assertKey: (key: unknown) => asserts key is keyof T;
     entries: () => [keyof T, T[keyof T]][];
-    isEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
+    hasEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
     assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
     object: T;
     keyOf: <V extends EnumToUnion<T[keyof T]>>(value: V) => Invert<T>[V];

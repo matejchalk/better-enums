@@ -13,7 +13,7 @@ test('basic enum', () => {
 
   void function (possibleRole: string) {
     expectNotAssignable<Role>(possibleRole);
-    if (ROLE.isValue(possibleRole)) {
+    if (ROLE.hasValue(possibleRole)) {
       expectType<Role>(possibleRole);
     }
 

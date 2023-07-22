@@ -17,7 +17,7 @@ test('basic enum', () => {
 
   void function (status: Status) {
     expectNotAssignable<SettledStatus>(status);
-    if (SETTLED_STATUS.isValue(status)) {
+    if (SETTLED_STATUS.hasValue(status)) {
       expectAssignable<SettledStatus>(status);
     }
   };

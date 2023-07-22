@@ -18,9 +18,9 @@ describe('Enum.exclude', () => {
       ]);
     });
 
-    test('isValue', () => {
-      expect(SETTLED_STATUS.isValue('pending')).toBe(false);
-      expect(SETTLED_STATUS.isValue('rejected')).toBe(true);
+    test('hasValue', () => {
+      expect(SETTLED_STATUS.hasValue('pending')).toBe(false);
+      expect(SETTLED_STATUS.hasValue('rejected')).toBe(true);
     });
 
     test('assertValue', () => {
@@ -40,18 +40,18 @@ describe('Enum.exclude', () => {
       expect(ERROR_LEVEL.values()).toEqual([1, 2]);
     });
 
-    test('isValue', () => {
-      expect(ERROR_LEVEL.isValue(0)).toBe(false);
-      expect(ERROR_LEVEL.isValue(1)).toBe(true);
+    test('hasValue', () => {
+      expect(ERROR_LEVEL.hasValue(0)).toBe(false);
+      expect(ERROR_LEVEL.hasValue(1)).toBe(true);
     });
 
     test('keys', () => {
       expect(ERROR_LEVEL.keys()).toEqual(['warn', 'error']);
     });
 
-    test('isKey', () => {
-      expect(ERROR_LEVEL.isKey('off')).toBe(false);
-      expect(ERROR_LEVEL.isKey('error')).toBe(true);
+    test('hasKey', () => {
+      expect(ERROR_LEVEL.hasKey('off')).toBe(false);
+      expect(ERROR_LEVEL.hasKey('error')).toBe(true);
     });
 
     test('entries', () => {

@@ -35,7 +35,7 @@ export function createEntryGuards<T extends Record<string, string | number>>(
 function createGuards<TItem, TKind extends 'Key' | 'Value' | 'Entry'>(
   kind: TKind,
   valuesOrPredicate: TItem[] | ((val: unknown) => true | string)
-): { [K in `is${TKind}`]: (val: unknown) => val is TItem } & {
+): { [K in `has${TKind}`]: (val: unknown) => val is TItem } & {
   [K in `assert${TKind}`]: (val: unknown) => asserts val is TItem;
 } {
   const isFn = (value: unknown): boolean => {
@@ -65,7 +65,7 @@ function createGuards<TItem, TKind extends 'Key' | 'Value' | 'Entry'>(
   };
 
   return {
-    [`is${kind}`]: isFn,
+    [`has${kind}`]: isFn,
     [`assert${kind}`]: assertFn,
   } as any;
 }
