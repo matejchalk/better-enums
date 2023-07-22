@@ -1,14 +1,14 @@
 import { expectTypeTestsToPassAsync } from 'jest-tsd';
-import { $enum, $extend, InferKey, InferValue } from '../src';
+import { Enum, InferKey, InferValue } from '../src';
 
-describe('$extend', () => {
+describe('Enum.extend', () => {
   test('TSD static type checks', async () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
   describe('basic enum', () => {
-    const STATUS = $enum(['alive', 'dead']);
-    const INFECTED_STATUS = $extend(STATUS, ['zombie']);
+    const STATUS = Enum(['alive', 'dead']);
+    const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
     type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
 
     test('values', () => {
@@ -34,8 +34,8 @@ describe('$extend', () => {
   });
 
   describe('labeled enum', () => {
-    const LOCALE = $enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-    const EXTENDED_LOCALE = $extend(LOCALE, { German: 'de' });
+    const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+    const EXTENDED_LOCALE = Enum.extend(LOCALE, { German: 'de' });
     type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
     test('values', () => {
@@ -120,8 +120,8 @@ describe('$extend', () => {
   });
 
   describe('labeled enum to basic enum', () => {
-    const LOCALE = $enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-    const EXTENDED_LOCALE = $extend(LOCALE, ['de']);
+    const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+    const EXTENDED_LOCALE = Enum.extend(LOCALE, ['de']);
     type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
     test('no additional properties', () => {

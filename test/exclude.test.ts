@@ -1,14 +1,14 @@
 import { expectTypeTestsToPassAsync } from 'jest-tsd';
-import { $enum, $exclude, InferValue } from '../src';
+import { Enum, InferValue } from '../src';
 
-describe('$exclude', () => {
+describe('Enum.exclude', () => {
   test('TSD static type checks', async () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
   describe('basic enum', () => {
-    const STATUS = $enum(['pending', 'fulfilled', 'rejected']);
-    const SETTLED_STATUS = $exclude(STATUS, ['pending']);
+    const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
+    const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
     type SettledStatus = InferValue<typeof SETTLED_STATUS>;
 
     test('values', () => {
@@ -32,8 +32,8 @@ describe('$exclude', () => {
   });
 
   describe('labeled enum - remove by key', () => {
-    const LEVEL = $enum({ off: 0, warn: 1, error: 2 });
-    const ERROR_LEVEL = $exclude(LEVEL, ['off']);
+    const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
+    const ERROR_LEVEL = Enum.exclude(LEVEL, ['off']);
     type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
 
     test('values', () => {

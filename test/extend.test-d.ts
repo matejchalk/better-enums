@@ -1,16 +1,9 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import {
-  $enum,
-  $extend,
-  BasicEnum,
-  InferKey,
-  InferValue,
-  LabeledEnum,
-} from '../src';
+import { BasicEnum, Enum, InferKey, InferValue, LabeledEnum } from '../src';
 
 test('basic enum', () => {
-  const STATUS = $enum(['alive', 'dead']);
-  const INFECTED_STATUS = $extend(STATUS, ['zombie']);
+  const STATUS = Enum(['alive', 'dead']);
+  const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
   type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
 
   expectType<BasicEnum<'alive' | 'dead' | 'zombie'>>(INFECTED_STATUS);
@@ -31,12 +24,12 @@ test('basic enum', () => {
     expectAssignable<InfectedStatus>(status);
   };
 
-  expectType<typeof STATUS>($extend(STATUS, []));
+  expectType<typeof STATUS>(Enum.extend(STATUS, []));
 });
 
 test('labeled enum', () => {
-  const LOCALE = $enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-  const EXTENDED_LOCALE = $extend(LOCALE, { German: 'de' });
+  const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+  const EXTENDED_LOCALE = Enum.extend(LOCALE, { German: 'de' });
   type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
   expectType<
@@ -60,12 +53,12 @@ test('labeled enum', () => {
     expectAssignable<ExtendedLocale>(locale);
   };
 
-  expectType<typeof LOCALE>($extend(LOCALE, {}));
+  expectType<typeof LOCALE>(Enum.extend(LOCALE, {}));
 });
 
 test('labeled enum to basic enum', () => {
-  const LOCALE = $enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-  const EXTENDED_LOCALE = $extend(LOCALE, ['de']);
+  const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+  const EXTENDED_LOCALE = Enum.extend(LOCALE, ['de']);
   type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
   expectType<BasicEnum<'en' | 'cs' | 'sk' | 'de'>>(EXTENDED_LOCALE);
@@ -76,6 +69,6 @@ test('labeled enum to basic enum', () => {
 
   expectNotAssignable<LabeledEnum<any>>(EXTENDED_LOCALE);
 
-  expectType<BasicEnum<InferValue<typeof LOCALE>>>($extend(LOCALE, []));
-  expectNotAssignable<typeof LOCALE>($extend(LOCALE, []));
+  expectType<BasicEnum<InferValue<typeof LOCALE>>>(Enum.extend(LOCALE, []));
+  expectNotAssignable<typeof LOCALE>(Enum.extend(LOCALE, []));
 });

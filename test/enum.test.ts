@@ -1,13 +1,13 @@
 import { expectTypeTestsToPassAsync } from 'jest-tsd';
-import { $enum, InferValue } from '../src';
+import { Enum, InferValue } from '../src';
 
-describe('$enum', () => {
+describe('Enum', () => {
   test('TSD static type checks', async () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
   describe('basic enum', () => {
-    const ROLE = $enum(['viewer', 'editor', 'owner']);
+    const ROLE = Enum(['viewer', 'editor', 'owner']);
     type Role = InferValue<typeof ROLE>;
 
     test('values', () => {
@@ -29,7 +29,7 @@ describe('$enum', () => {
   });
 
   describe('labeled enum', () => {
-    const LANGUAGE = $enum({
+    const LANGUAGE = Enum({
       en: 'English',
       cs: 'Čeština',
       es: 'Español',
@@ -119,7 +119,7 @@ describe('$enum', () => {
       Allow = 'allow',
       Block = 'block',
     }
-    const ACTION = $enum(Action);
+    const ACTION = Enum(Action);
 
     test('values', () => {
       expect(ACTION.values()).toEqual<InferValue<typeof ACTION>[]>([
@@ -172,7 +172,7 @@ describe('$enum', () => {
       warn,
       error,
     }
-    const LEVEL = $enum(Level);
+    const LEVEL = Enum(Level);
 
     test('values', () => {
       expect(LEVEL.values()).toEqual<Level[]>([0, 1, 2]);

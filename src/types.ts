@@ -1,3 +1,60 @@
+export interface BetterEnum {
+  <T extends string | number>(values: T[]): BasicEnum<T>;
+
+  <const T extends Record<string, string | number>>(obj: T): LabeledEnum<T>;
+
+  extend<
+    TEnum extends BasicEnum<string | number>,
+    TExtra extends string | number
+  >(
+    srcEnum: TEnum,
+    extraValues: TExtra[]
+  ): BasicEnum<InferValue<TEnum> | TExtra>;
+
+  extend<
+    TEnum extends LabeledEnum<Record<string, string | number>>,
+    const TExtra extends Record<string, string | number>
+  >(
+    srcEnum: TEnum,
+    extraObj: TExtra
+  ): LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
+
+  exclude<
+    TEnum extends LabeledEnum<Record<string, string | number>>,
+    TKey extends InferKey<TEnum>
+  >(
+    srcEnum: TEnum,
+    keys: TKey[]
+  ): LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
+
+  exclude<
+    TEnum extends LabeledEnum<Record<string, string | number>>,
+    TValue extends InferValue<TEnum>
+  >(
+    srcEnum: TEnum,
+    values: TValue[]
+  ): LabeledEnum<
+    Prettify<
+      Pick<
+        TEnum['object'],
+        {
+          [K in keyof TEnum['object']]: TEnum['object'][K] extends TValue
+            ? never
+            : K;
+        }[keyof TEnum['object']]
+      >
+    >
+  >;
+
+  exclude<
+    TEnum extends BasicEnum<string | number>,
+    TValue extends InferValue<TEnum>
+  >(
+    srcEnum: TEnum,
+    values: TValue[]
+  ): BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
+}
+
 export type BasicEnum<T extends string | number> = {
   values: () => T[];
   isValue: (value: unknown) => value is T;

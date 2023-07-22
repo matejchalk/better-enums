@@ -1,4 +1,4 @@
-import { $enum } from './enum';
+import { create } from './create';
 import type {
   BasicEnum,
   InferKey,
@@ -7,7 +7,7 @@ import type {
   Prettify,
 } from './types';
 
-export function $exclude<
+export function exclude<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TKey extends InferKey<TEnum>
 >(
@@ -15,7 +15,7 @@ export function $exclude<
   keys: TKey[]
 ): LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
 
-export function $exclude<
+export function exclude<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TValue extends InferValue<TEnum>
 >(
@@ -34,7 +34,7 @@ export function $exclude<
   >
 >;
 
-export function $exclude<
+export function exclude<
   TEnum extends BasicEnum<string | number>,
   TValue extends InferValue<TEnum>
 >(
@@ -42,7 +42,7 @@ export function $exclude<
   values: TValue[]
 ): BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
 
-export function $exclude(
+export function exclude(
   srcEnum:
     | BasicEnum<string | number>
     | LabeledEnum<Record<string, string | number>>,
@@ -50,13 +50,13 @@ export function $exclude(
 ) {
   if ('object' in srcEnum) {
     if (items.every(item => item in srcEnum.object)) {
-      return $enum(
+      return create(
         Object.fromEntries(
           Object.entries(srcEnum.object).filter(([key]) => !items.includes(key))
         )
       );
     }
-    return $enum(
+    return create(
       Object.fromEntries(
         Object.entries(srcEnum.object).filter(
           ([, value]) => !items.includes(value)
@@ -64,5 +64,5 @@ export function $exclude(
       )
     );
   }
-  return $enum(srcEnum.values().filter(value => !items.includes(value)));
+  return create(srcEnum.values().filter(value => !items.includes(value)));
 }

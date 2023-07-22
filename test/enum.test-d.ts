@@ -1,8 +1,8 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { $enum, BasicEnum, InferKey, InferValue } from '../src';
+import { BasicEnum, Enum, InferKey, InferValue } from '../src';
 
 test('basic enum', () => {
-  const ROLE = $enum(['viewer', 'editor', 'owner']);
+  const ROLE = Enum(['viewer', 'editor', 'owner']);
   type Role = InferValue<typeof ROLE>;
 
   void function (role: Role) {
@@ -25,7 +25,7 @@ test('basic enum', () => {
 });
 
 test('labeled enum', () => {
-  const LANGUAGE = $enum({
+  const LANGUAGE = Enum({
     en: 'English',
     cs: 'Čeština',
     es: 'Español',
@@ -67,7 +67,7 @@ test('from TypeScript string enum', () => {
     Block = 'block',
   }
 
-  const ACTION = $enum(ActionEnum);
+  const ACTION = Enum(ActionEnum);
   type Action = InferValue<typeof ACTION>;
 
   void function (action: Action) {
@@ -92,7 +92,7 @@ test('from TypeScript number enum', () => {
     error,
   }
 
-  const LEVEL = $enum(LevelEnum);
+  const LEVEL = Enum(LevelEnum);
   type Level = InferValue<typeof LEVEL>;
 
   void function (level: 1) {

@@ -1,17 +1,10 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import {
-  $enum,
-  $exclude,
-  BasicEnum,
-  InferKey,
-  InferValue,
-  LabeledEnum,
-} from '../src';
+import { BasicEnum, Enum, InferKey, InferValue, LabeledEnum } from '../src';
 
 test('basic enum', () => {
-  const STATUS = $enum(['pending', 'fulfilled', 'rejected']);
+  const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
   type Status = InferValue<typeof STATUS>;
-  const SETTLED_STATUS = $exclude(STATUS, ['pending']);
+  const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
   type SettledStatus = InferValue<typeof SETTLED_STATUS>;
 
   expectType<BasicEnum<'fulfilled' | 'rejected'>>(SETTLED_STATUS);
@@ -33,14 +26,14 @@ test('basic enum', () => {
     expectAssignable<SettledStatus>(status);
   };
 
-  expectType<typeof STATUS>($exclude(STATUS, []));
+  expectType<typeof STATUS>(Enum.exclude(STATUS, []));
 
-  expectType<BasicEnum<never>>($exclude(STATUS, STATUS.values()));
+  expectType<BasicEnum<never>>(Enum.exclude(STATUS, STATUS.values()));
 });
 
 test('labeled enum - remove by key', () => {
-  const LEVEL = $enum({ off: 0, warn: 1, error: 2 });
-  const ERROR_LEVEL = $exclude(LEVEL, ['off']);
+  const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
+  const ERROR_LEVEL = Enum.exclude(LEVEL, ['off']);
   type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
 
   expectType<
@@ -62,18 +55,18 @@ test('labeled enum - remove by key', () => {
     expectAssignable<InferValue<typeof LEVEL>>(level);
   };
 
-  expectType<typeof LEVEL>($exclude(LEVEL, []));
+  expectType<typeof LEVEL>(Enum.exclude(LEVEL, []));
 
   expectType<LabeledEnum<{ readonly off: 0 }>>(
-    $exclude(LEVEL, ['warn', 'error'])
+    Enum.exclude(LEVEL, ['warn', 'error'])
   );
 
-  expectType<LabeledEnum<{}>>($exclude(LEVEL, LEVEL.keys()));
+  expectType<LabeledEnum<{}>>(Enum.exclude(LEVEL, LEVEL.keys()));
 });
 
 test('labeled enum - remove by value', () => {
-  const LEVEL = $enum({ off: 0, warn: 1, error: 2 });
-  const ERROR_LEVEL = $exclude(LEVEL, [0]);
+  const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
+  const ERROR_LEVEL = Enum.exclude(LEVEL, [0]);
   type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
 
   expectType<
@@ -95,9 +88,9 @@ test('labeled enum - remove by value', () => {
     expectAssignable<InferValue<typeof LEVEL>>(level);
   };
 
-  expectType<typeof LEVEL>($exclude(LEVEL, []));
+  expectType<typeof LEVEL>(Enum.exclude(LEVEL, []));
 
-  expectType<LabeledEnum<{ readonly off: 0 }>>($exclude(LEVEL, [1, 2]));
+  expectType<LabeledEnum<{ readonly off: 0 }>>(Enum.exclude(LEVEL, [1, 2]));
 
-  expectType<LabeledEnum<{}>>($exclude(LEVEL, LEVEL.values()));
+  expectType<LabeledEnum<{}>>(Enum.exclude(LEVEL, LEVEL.values()));
 });
