@@ -1,18 +1,20 @@
 import { create } from './create';
-import type { BasicEnum, InferValue, LabeledEnum, Prettify } from './types';
+import type {
+  BasicEnum,
+  BasicEnumExtended,
+  LabeledEnum,
+  LabeledEnumExtended,
+} from './types';
 
 export function extend<
   TEnum extends BasicEnum<string | number>,
   TExtra extends string | number
->(srcEnum: TEnum, extraValues: TExtra[]): BasicEnum<InferValue<TEnum> | TExtra>;
+>(srcEnum: TEnum, extraValues: TExtra[]): BasicEnumExtended<TEnum, TExtra>;
 
 export function extend<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   const TExtra extends Record<string, string | number>
->(
-  srcEnum: TEnum,
-  extraObj: TExtra
-): LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
+>(srcEnum: TEnum, extraObj: TExtra): LabeledEnumExtended<TEnum, TExtra>;
 
 export function extend(
   srcEnum:

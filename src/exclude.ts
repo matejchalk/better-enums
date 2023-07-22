@@ -1,46 +1,28 @@
 import { create } from './create';
 import type {
   BasicEnum,
+  BasicEnumExcluded,
   InferKey,
   InferValue,
   LabeledEnum,
-  Prettify,
+  LabeledEnumExcludedByKeys,
+  LabeledEnumExcludedByValues,
 } from './types';
 
 export function exclude<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TKey extends InferKey<TEnum>
->(
-  srcEnum: TEnum,
-  keys: TKey[]
-): LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
+>(srcEnum: TEnum, keys: TKey[]): LabeledEnumExcludedByKeys<TEnum, TKey>;
 
 export function exclude<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TValue extends InferValue<TEnum>
->(
-  srcEnum: TEnum,
-  values: TValue[]
-): LabeledEnum<
-  Prettify<
-    Pick<
-      TEnum['object'],
-      {
-        [K in keyof TEnum['object']]: TEnum['object'][K] extends TValue
-          ? never
-          : K;
-      }[keyof TEnum['object']]
-    >
-  >
->;
+>(srcEnum: TEnum, values: TValue[]): LabeledEnumExcludedByValues<TEnum, TValue>;
 
 export function exclude<
   TEnum extends BasicEnum<string | number>,
   TValue extends InferValue<TEnum>
->(
-  srcEnum: TEnum,
-  values: TValue[]
-): BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
+>(srcEnum: TEnum, values: TValue[]): BasicEnumExcluded<TEnum, TValue>;
 
 export function exclude(
   srcEnum:

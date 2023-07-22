@@ -9,7 +9,7 @@ export interface BetterEnum {
   >(
     srcEnum: TEnum,
     extraValues: TExtra[]
-  ): BasicEnum<InferValue<TEnum> | TExtra>;
+  ): BasicEnumExtended<TEnum, TExtra>;
 
   extend<
     TEnum extends LabeledEnum<Record<string, string | number>>,
@@ -17,7 +17,7 @@ export interface BetterEnum {
   >(
     srcEnum: TEnum,
     extraObj: TExtra
-  ): LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
+  ): LabeledEnumExtended<TEnum, TExtra>;
 
   exclude<
     TEnum extends LabeledEnum<Record<string, string | number>>,
@@ -25,7 +25,7 @@ export interface BetterEnum {
   >(
     srcEnum: TEnum,
     keys: TKey[]
-  ): LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
+  ): LabeledEnumExcludedByKeys<TEnum, TKey>;
 
   exclude<
     TEnum extends LabeledEnum<Record<string, string | number>>,
@@ -33,18 +33,7 @@ export interface BetterEnum {
   >(
     srcEnum: TEnum,
     values: TValue[]
-  ): LabeledEnum<
-    Prettify<
-      Pick<
-        TEnum['object'],
-        {
-          [K in keyof TEnum['object']]: TEnum['object'][K] extends TValue
-            ? never
-            : K;
-        }[keyof TEnum['object']]
-      >
-    >
-  >;
+  ): LabeledEnumExcludedByValues<TEnum, TValue>;
 
   exclude<
     TEnum extends BasicEnum<string | number>,
@@ -52,7 +41,7 @@ export interface BetterEnum {
   >(
     srcEnum: TEnum,
     values: TValue[]
-  ): BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
+  ): BasicEnumExcluded<TEnum, TValue>;
 }
 
 export type BasicEnum<T extends string | number> = {
@@ -80,14 +69,48 @@ export type InferValue<T extends BasicEnum<string | number>> = EnumToUnion<
 export type InferKey<T extends LabeledEnum<Record<string, string | number>>> =
   EnumToUnion<ReturnType<T['keys']>[number]>;
 
-export type EnumToUnion<T extends string | number> = T extends string
-  ? `${T}`
-  : T;
+type EnumToUnion<T extends string | number> = T extends string ? `${T}` : T;
 
-export type Invert<T extends Record<PropertyKey, PropertyKey>> = {
+type Invert<T extends Record<PropertyKey, PropertyKey>> = {
   [K in keyof T as T[K]]: K;
 };
 
-export type Prettify<T> = {
+type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+export type BasicEnumExtended<
+  TEnum extends BasicEnum<string | number>,
+  TExtra extends string | number
+> = BasicEnum<InferValue<TEnum> | TExtra>;
+
+export type LabeledEnumExtended<
+  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TExtra extends Record<string, string | number>
+> = LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
+
+export type BasicEnumExcluded<
+  TEnum extends BasicEnum<string | number>,
+  TValue extends InferValue<TEnum>
+> = BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
+
+export type LabeledEnumExcludedByKeys<
+  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TKey extends InferKey<TEnum>
+> = LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
+
+export type LabeledEnumExcludedByValues<
+  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TValue extends InferValue<TEnum>
+> = LabeledEnum<
+  Prettify<
+    Pick<
+      TEnum['object'],
+      {
+        [K in keyof TEnum['object']]: TEnum['object'][K] extends TValue
+          ? never
+          : K;
+      }[keyof TEnum['object']]
+    >
+  >
+>;
