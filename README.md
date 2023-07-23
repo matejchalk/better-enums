@@ -4,6 +4,8 @@
 
 The `better-enums` library provides a simple utility for creating an improved version of TypeScript enums.
 
+Full documentation is hosted [here](https://matejchalk.github.io/better-enums/).
+
 ## Motivation
 
 ### Enums vs unions
