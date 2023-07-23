@@ -16,6 +16,7 @@ export interface IEnum {
    * const ROLE = Enum(['viewer', 'editor', 'owner']);
    *
    * @param values Array of all values.
+   * @template T Type of values (union of strings or numbers).
    * @returns Basic enum object.
    */
   <T extends string | number>(values: T[]): BasicEnum<T>;
@@ -31,6 +32,7 @@ export interface IEnum {
    * });
    *
    * @param obj Object mapping keys to values.
+   * @template T Object type (defining types of keys and correspoding values).
    * @returns Labeled enum object.
    */
   <const T extends Record<string, string | number>>(obj: T): LabeledEnum<T>;
@@ -44,6 +46,8 @@ export interface IEnum {
    *
    * @param srcEnum Source enum object (basic or labeled).
    * @param extraValues Values to be added.
+   * @template TEnum Type of basic enum or labeled enum.
+   * @template TExtra Type of added values (union of strings or numbers).
    * @returns Basic enum object.
    */
   extend<
@@ -63,6 +67,8 @@ export interface IEnum {
    *
    * @param srcEnum Source labeled enum object.
    * @param extraObj Object with key-value pairs to be added.
+   * @template TEnum Type of labeled enum.
+   * @template TExtra Object type (defining types of added keys and correspoding values).
    * @returns Labeled enum object.
    */
   extend<
@@ -82,6 +88,8 @@ export interface IEnum {
    *
    * @param srcEnum Source labeled enum object.
    * @param keys Array of keys to remove.
+   * @template TEnum Type of labeled enum.
+   * @template TKey Type of keys to be removed.
    * @returns Labeled enum object.
    */
   exclude<
@@ -101,6 +109,8 @@ export interface IEnum {
    *
    * @param srcEnum Source labeled enum object.
    * @param values Array of values to remove.
+   * @template TEnum Type of labeled enum.
+   * @template TValue Type of values to be removed.
    * @returns Labeled enum object.
    */
   exclude<
@@ -120,6 +130,8 @@ export interface IEnum {
    *
    * @param srcEnum Source basic enum object.
    * @param values Array of values to remove.
+   * @template TEnum Type of basic enum.
+   * @template TValue Type of values to be removed.
    * @returns Basic enum object.
    */
   exclude<
@@ -136,6 +148,8 @@ export interface IEnum {
  *
  * A basic enum is more similar to a union than a built-in `enum`.
  * Unlike a {@link LabeledEnum}, no keys are defined for accessing values.
+ *
+ * @template T Type of value (union of strings or numbers).
  */
 export type BasicEnum<T extends string | number> = {
   /**
@@ -170,6 +184,8 @@ export type BasicEnum<T extends string | number> = {
  * - {@link BasicEnum.assertValue}
  *
  * Additional methods are also supported for handling keys and key-value pairs.
+ *
+ * @template T Object type (defining types of keys and correspoding values).
  */
 export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
   BasicEnum<T[keyof T]> & {
@@ -237,6 +253,8 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
  *
  * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
  * type Locale = InferValue<typeof LOCALE>; // Locale is 'en' | 'cs' | 'sk'
+ *
+ * @template T Type of basic enum or labeled enum.
  */
 export type InferValue<T extends BasicEnum<string | number>> = EnumToUnion<
   ReturnType<T['values']>[number]
@@ -248,6 +266,8 @@ export type InferValue<T extends BasicEnum<string | number>> = EnumToUnion<
  * @example
  * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
  * type LocaleKey = InferKey<typeof LOCALE>; // Locale is 'English' | 'Czech' | 'Slovak'
+ *
+ * @template T Type of labeled enum.
  */
 export type InferKey<T extends LabeledEnum<Record<string, string | number>>> =
   EnumToUnion<ReturnType<T['keys']>[number]>;
