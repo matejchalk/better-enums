@@ -2,16 +2,36 @@
   "name": "better-enums",
   "version": "0.0.1",
   "description": "Better enums for TypeScript",
+  "keywords": [
+    "enum",
+    "union",
+    "typescript"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matejchalk/better-enums.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matejchalk/better-enums/issues"
+  },
+  "homepage": "https://matejchalk.github.io/better-enums/",
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "tsup",
     "test": "jest",
     "docs": "typedoc"
   },
   "author": "Matěj Chalk <matejchalk@gmail.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "devDependencies": {
     "@mxssfd/typedoc-theme": "^1.1.2",
     "@tsd/typescript": "^5.1.6",
