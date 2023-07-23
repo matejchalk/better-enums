@@ -13,6 +13,7 @@
   "author": "Matěj Chalk <matejchalk@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@mxssfd/typedoc-theme": "^1.1.2",
     "@tsd/typescript": "^5.1.6",
     "@types/jest": "^29.5.2",
     "jest": "^29.6.1",

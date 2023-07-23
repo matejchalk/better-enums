@@ -1,4 +1,11 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["src/index.ts"]
+  "entryPoints": ["src/index.ts"],
+  "basePath": "./",
+  "searchInComments": true,
+  "sort": ["source-order"],
+  "plugin": ["@mxssfd/typedoc-theme"],
+  "theme": "my-theme",
+  "includeVersion": true,
+  "customCss": "./typedoc-custom-styles.css"
 }
