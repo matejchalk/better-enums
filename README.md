@@ -1,5 +1,10 @@
 # better-enums
 
+[![npm version](https://badge.fury.io/js/better-enums.svg)](https://badge.fury.io/js/better-enums)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/matejchalk/better-enums/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/matejchalk/better-enums/actions/workflows/ci.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/matejchalk/better-enums/branch/main/graph/badge.svg?token=PYFUHMSYXU)](https://codecov.io/gh/matejchalk/better-enums)
+
 **Better enums for TypeScript.**
 
 The `better-enums` library provides a simple utility for creating an improved version of TypeScript enums.
