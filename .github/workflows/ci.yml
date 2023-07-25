@@ -18,3 +18,7 @@ jobs:
         run: npm ci
       - name: Execute unit tests
         run: npm test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
