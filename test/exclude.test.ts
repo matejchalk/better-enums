@@ -72,4 +72,46 @@ describe('Enum.exclude', () => {
       expect(ERROR_LEVEL.keyOf(1)).toBe('warn');
     });
   });
+
+  describe('labeled enum - remove by value', () => {
+    const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
+    const ERROR_LEVEL = Enum.exclude(LEVEL, [0]);
+    type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
+
+    test('values', () => {
+      expect(ERROR_LEVEL.values()).toEqual([1, 2]);
+    });
+
+    test('hasValue', () => {
+      expect(ERROR_LEVEL.hasValue(0)).toBe(false);
+      expect(ERROR_LEVEL.hasValue(1)).toBe(true);
+    });
+
+    test('keys', () => {
+      expect(ERROR_LEVEL.keys()).toEqual(['warn', 'error']);
+    });
+
+    test('hasKey', () => {
+      expect(ERROR_LEVEL.hasKey('off')).toBe(false);
+      expect(ERROR_LEVEL.hasKey('error')).toBe(true);
+    });
+
+    test('entries', () => {
+      expect(ERROR_LEVEL.entries()).toEqual([
+        ['warn', 1],
+        ['error', 2],
+      ]);
+    });
+
+    test('object', () => {
+      expect(ERROR_LEVEL.object).toEqual<(typeof ERROR_LEVEL)['object']>({
+        warn: 1,
+        error: 2,
+      });
+    });
+
+    test('keyOf', () => {
+      expect(ERROR_LEVEL.keyOf(1)).toBe('warn');
+    });
+  });
 });
