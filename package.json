@@ -22,7 +22,7 @@
   },
   "homepage": "https://matejchalk.github.io/better-enums/",
   "scripts": {
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm test && npm run build && npm run docs",
     "build": "tsup",
     "test": "jest",
     "docs": "typedoc",
