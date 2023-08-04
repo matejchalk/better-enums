@@ -129,7 +129,7 @@ const ROLE = Enum({
   Admin: 'admin',
 });
 type Role = InferValue<typeof ROLE>;
-const Role = ROLE.object;
+const Role = ROLE.accessor;
 ```
 
 Then you can access enum values either directly or via their key:

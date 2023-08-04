@@ -31,7 +31,7 @@ test('labeled enum', () => {
     es: 'Español',
   });
   type Language = InferValue<typeof LANGUAGE>;
-  const Language = LANGUAGE.object;
+  const Language = LANGUAGE.accessor;
 
   void function (language: Language) {
     expectType<'English' | 'Čeština' | 'Español'>(language);

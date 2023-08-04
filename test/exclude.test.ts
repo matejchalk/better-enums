@@ -61,8 +61,8 @@ describe('Enum.exclude', () => {
       ]);
     });
 
-    test('object', () => {
-      expect(ERROR_LEVEL.object).toEqual<(typeof ERROR_LEVEL)['object']>({
+    test('accessor', () => {
+      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
         warn: 1,
         error: 2,
       });
@@ -103,8 +103,8 @@ describe('Enum.exclude', () => {
       ]);
     });
 
-    test('object', () => {
-      expect(ERROR_LEVEL.object).toEqual<(typeof ERROR_LEVEL)['object']>({
+    test('accessor', () => {
+      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
         warn: 1,
         error: 2,
       });

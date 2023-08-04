@@ -30,17 +30,19 @@ export function exclude(
     | LabeledEnum<Record<string, string | number>>,
   items: (string | number)[]
 ) {
-  if ('object' in srcEnum) {
-    if (items.every(item => item in srcEnum.object)) {
+  if ('accessor' in srcEnum) {
+    if (items.every(item => item in srcEnum.accessor)) {
       return create(
         Object.fromEntries(
-          Object.entries(srcEnum.object).filter(([key]) => !items.includes(key))
+          Object.entries(srcEnum.accessor).filter(
+            ([key]) => !items.includes(key)
+          )
         )
       );
     }
     return create(
       Object.fromEntries(
-        Object.entries(srcEnum.object).filter(
+        Object.entries(srcEnum.accessor).filter(
           ([, value]) => !items.includes(value)
         )
       )

@@ -100,8 +100,8 @@ describe('Enum', () => {
       );
     });
 
-    test('obj', () => {
-      expect(LANGUAGE.object).toEqual({
+    test('accessor', () => {
+      expect(LANGUAGE.accessor).toEqual({
         en: 'English',
         cs: 'Čeština',
         es: 'Español',
@@ -153,8 +153,8 @@ describe('Enum', () => {
       ]);
     });
 
-    test('object', () => {
-      expect(ACTION.object).toEqual({
+    test('accessor', () => {
+      expect(ACTION.accessor).toEqual({
         Allow: 'allow',
         Block: 'block',
       });

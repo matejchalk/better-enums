@@ -102,9 +102,9 @@ describe('Enum.extend', () => {
       );
     });
 
-    test('object', () => {
-      expect(EXTENDED_LOCALE.object).toEqual<
-        (typeof EXTENDED_LOCALE)['object']
+    test('accessor', () => {
+      expect(EXTENDED_LOCALE.accessor).toEqual<
+        (typeof EXTENDED_LOCALE)['accessor']
       >({
         English: 'en',
         Czech: 'cs',

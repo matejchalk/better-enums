@@ -53,7 +53,7 @@ function createLabeledEnum<const T extends Record<string, string | number>>(
     ...createKeyGuards(Object.keys(obj)),
     entries: () => Object.entries(obj) as any,
     ...createEntryGuards(obj, objInverted),
-    object: Object.freeze(obj),
+    accessor: Object.freeze(obj),
     keyOf: value => objInverted[value] as any,
   };
 }

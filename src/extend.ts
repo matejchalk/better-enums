@@ -26,7 +26,7 @@ export function extend(
     return create([...srcEnum.values(), ...extras]);
   }
   return create({
-    ...('object' in srcEnum && srcEnum.object),
+    ...('accessor' in srcEnum && srcEnum.accessor),
     ...extras,
   });
 }

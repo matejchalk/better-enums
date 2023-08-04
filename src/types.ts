@@ -231,11 +231,11 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
      *
      * @example
      * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-     * const Locale = LOCALE.object;
+     * const Locale = LOCALE.accessor;
      *
      * const locale = Locale.Czech; // locale is 'cs'
      */
-    object: T;
+    accessor: T;
     /**
      * Access key for given value.
      * @param value Enum value.
@@ -290,7 +290,7 @@ export type SimpleEnumExtended<
 export type LabeledEnumExtended<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TExtra extends Record<string, string | number>
-> = LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
+> = LabeledEnum<Prettify<TEnum['accessor'] & TExtra>>;
 
 export type SimpleEnumExcluded<
   TEnum extends SimpleEnum<string | number>,
@@ -300,7 +300,7 @@ export type SimpleEnumExcluded<
 export type LabeledEnumExcludedByKeys<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TKey extends InferKey<TEnum>
-> = LabeledEnum<Prettify<Omit<TEnum['object'], TKey>>>;
+> = LabeledEnum<Prettify<Omit<TEnum['accessor'], TKey>>>;
 
 export type LabeledEnumExcludedByValues<
   TEnum extends LabeledEnum<Record<string, string | number>>,
@@ -308,12 +308,12 @@ export type LabeledEnumExcludedByValues<
 > = LabeledEnum<
   Prettify<
     Pick<
-      TEnum['object'],
+      TEnum['accessor'],
       {
-        [K in keyof TEnum['object']]: TEnum['object'][K] extends TValue
+        [K in keyof TEnum['accessor']]: TEnum['accessor'][K] extends TValue
           ? never
           : K;
-      }[keyof TEnum['object']]
+      }[keyof TEnum['accessor']]
     >
   >
 >;
