@@ -1,7 +1,7 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { BasicEnum, Enum, InferKey, InferValue } from '../src';
+import { Enum, InferKey, InferValue, SimpleEnum } from '../src';
 
-test('basic enum', () => {
+test('simple enum', () => {
   const ROLE = Enum(['viewer', 'editor', 'owner']);
   type Role = InferValue<typeof ROLE>;
 
@@ -18,7 +18,7 @@ test('basic enum', () => {
     }
 
     // assert function requires every identifier in the call chain to have an explicit type annotation
-    const ROLE_EXPLICIT: BasicEnum<Role> = ROLE;
+    const ROLE_EXPLICIT: SimpleEnum<Role> = ROLE;
     ROLE_EXPLICIT.assertValue(possibleRole);
     expectType<Role>(possibleRole);
   };

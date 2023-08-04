@@ -3,9 +3,9 @@ import {
   createKeyGuards,
   createValueGuards,
 } from './guards';
-import type { BasicEnum, LabeledEnum } from './types';
+import type { LabeledEnum, SimpleEnum } from './types';
 
-export function create<T extends string | number>(values: T[]): BasicEnum<T>;
+export function create<T extends string | number>(values: T[]): SimpleEnum<T>;
 
 export function create<const T extends Record<string, string | number>>(
   obj: T
@@ -15,12 +15,14 @@ export function create(
   param: (string | number)[] | Record<string, string | number>
 ) {
   if (Array.isArray(param)) {
-    return createBasicEnum([...param]);
+    return createSimpleEnum([...param]);
   }
   return createLabeledEnum(param);
 }
 
-function createBasicEnum<T extends string | number>(values: T[]): BasicEnum<T> {
+function createSimpleEnum<T extends string | number>(
+  values: T[]
+): SimpleEnum<T> {
   return {
     values: () => values,
     ...createValueGuards(values),
@@ -46,7 +48,7 @@ function createLabeledEnum<const T extends Record<string, string | number>>(
   );
 
   return {
-    ...createBasicEnum(Object.values(obj) as T[keyof T][]),
+    ...createSimpleEnum(Object.values(obj) as T[keyof T][]),
     keys: () => Object.keys(obj),
     ...createKeyGuards(Object.keys(obj)),
     entries: () => Object.entries(obj) as any,

@@ -6,20 +6,20 @@
  *   - either by adding more values (`Enum.extend(...)`),
  *   - or by removing values (`Enum.exclude(...)`).
  *
- * Each function has different overloads to support creating both basic and labeled enums.
+ * Each function has different overloads to support creating both simple and labeled enums.
  */
 export interface IEnum {
   /**
-   * Creates a basic enum from an array of values.
+   * Creates a simple enum from an array of values.
    *
    * @example
    * const ROLE = Enum(['viewer', 'editor', 'owner']);
    *
    * @param values Array of all values.
    * @template T Type of values (union of strings or numbers).
-   * @returns Basic enum object.
+   * @returns Simple enum object.
    */
-  <T extends string | number>(values: T[]): BasicEnum<T>;
+  <T extends string | number>(values: T[]): SimpleEnum<T>;
 
   /**
    * Creates a labeled enum from an object.
@@ -38,25 +38,25 @@ export interface IEnum {
   <const T extends Record<string, string | number>>(obj: T): LabeledEnum<T>;
 
   /**
-   * Creates a basic enum by adding values to another enum.
+   * Creates a simple enum by adding values to another enum.
    *
    * @example
    * const STATUS = Enum(['alive', 'dead']);
    * const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
    *
-   * @param srcEnum Source enum object (basic or labeled).
+   * @param srcEnum Source enum object (simple or labeled).
    * @param extraValues Values to be added.
-   * @template TEnum Type of basic enum or labeled enum.
+   * @template TEnum Type of simple enum or labeled enum.
    * @template TExtra Type of added values (union of strings or numbers).
-   * @returns Basic enum object.
+   * @returns Simple enum object.
    */
   extend<
-    TEnum extends BasicEnum<string | number>,
+    TEnum extends SimpleEnum<string | number>,
     TExtra extends string | number
   >(
     srcEnum: TEnum,
     extraValues: TExtra[]
-  ): BasicEnumExtended<TEnum, TExtra>;
+  ): SimpleEnumExtended<TEnum, TExtra>;
 
   /**
    * Creates a labeled enum by adding keys and values to another enum.
@@ -122,36 +122,36 @@ export interface IEnum {
   ): LabeledEnumExcludedByValues<TEnum, TValue>;
 
   /**
-   * Creates a basic enum by removing values from another enum.
+   * Creates a simple enum by removing values from another enum.
    *
    * @example
    * const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
    * const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
    *
-   * @param srcEnum Source basic enum object.
+   * @param srcEnum Source simple enum object.
    * @param values Array of values to remove.
-   * @template TEnum Type of basic enum.
+   * @template TEnum Type of simple enum.
    * @template TValue Type of values to be removed.
-   * @returns Basic enum object.
+   * @returns Simple enum object.
    */
   exclude<
-    TEnum extends BasicEnum<string | number>,
+    TEnum extends SimpleEnum<string | number>,
     TValue extends InferValue<TEnum>
   >(
     srcEnum: TEnum,
     values: TValue[]
-  ): BasicEnumExcluded<TEnum, TValue>;
+  ): SimpleEnumExcluded<TEnum, TValue>;
 }
 
 /**
  * Enum object created from a list of values.
  *
- * A basic enum is more similar to a union than a built-in `enum`.
+ * A simple enum is more similar to a union than a built-in `enum`.
  * Unlike a {@link LabeledEnum}, no keys are defined for accessing values.
  *
  * @template T Type of value (union of strings or numbers).
  */
-export type BasicEnum<T extends string | number> = {
+export type SimpleEnum<T extends string | number> = {
   /**
    * Lists all values.
    * @returns Array of values (safe to mutate).
@@ -178,17 +178,17 @@ export type BasicEnum<T extends string | number> = {
  * A labeled enum is more similar to a built-in `enum`,
  * because it enables using values indirectly via their keys (dot syntax).
  *
- * A labeled enum supports the same methods as a {@link BasicEnum}:
- * - {@link BasicEnum.values}
- * - {@link BasicEnum.hasValue}
- * - {@link BasicEnum.assertValue}
+ * A labeled enum supports the same methods as a {@link SimpleEnum}:
+ * - {@link SimpleEnum.values}
+ * - {@link SimpleEnum.hasValue}
+ * - {@link SimpleEnum.assertValue}
  *
  * Additional methods are also supported for handling keys and key-value pairs.
  *
  * @template T Object type (defining types of keys and correspoding values).
  */
 export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
-  BasicEnum<T[keyof T]> & {
+  SimpleEnum<T[keyof T]> & {
     /**
      * Lists all keys.
      * @returns Array of keys (similar to `Object.keys`).
@@ -245,7 +245,7 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
   };
 
 /**
- * Utility type to infer type of value for a basic or labeled enum.
+ * Utility type to infer type of value for a simple or labeled enum.
  *
  * @example
  * const STATUS = Enum(['on', 'off']);
@@ -254,9 +254,9 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
  * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
  * type Locale = InferValue<typeof LOCALE>; // Locale is 'en' | 'cs' | 'sk'
  *
- * @template T Type of basic enum or labeled enum.
+ * @template T Type of simple enum or labeled enum.
  */
-export type InferValue<T extends BasicEnum<string | number>> = EnumToUnion<
+export type InferValue<T extends SimpleEnum<string | number>> = EnumToUnion<
   ReturnType<T['values']>[number]
 >;
 
@@ -282,20 +282,20 @@ type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
-export type BasicEnumExtended<
-  TEnum extends BasicEnum<string | number>,
+export type SimpleEnumExtended<
+  TEnum extends SimpleEnum<string | number>,
   TExtra extends string | number
-> = BasicEnum<InferValue<TEnum> | TExtra>;
+> = SimpleEnum<InferValue<TEnum> | TExtra>;
 
 export type LabeledEnumExtended<
   TEnum extends LabeledEnum<Record<string, string | number>>,
   TExtra extends Record<string, string | number>
 > = LabeledEnum<Prettify<TEnum['object'] & TExtra>>;
 
-export type BasicEnumExcluded<
-  TEnum extends BasicEnum<string | number>,
+export type SimpleEnumExcluded<
+  TEnum extends SimpleEnum<string | number>,
   TValue extends InferValue<TEnum>
-> = BasicEnum<Exclude<InferValue<TEnum>, TValue>>;
+> = SimpleEnum<Exclude<InferValue<TEnum>, TValue>>;
 
 export type LabeledEnumExcludedByKeys<
   TEnum extends LabeledEnum<Record<string, string | number>>,

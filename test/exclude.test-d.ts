@@ -1,13 +1,13 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { BasicEnum, Enum, InferKey, InferValue, LabeledEnum } from '../src';
+import { Enum, InferKey, InferValue, LabeledEnum, SimpleEnum } from '../src';
 
-test('basic enum', () => {
+test('simple enum', () => {
   const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
   type Status = InferValue<typeof STATUS>;
   const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
   type SettledStatus = InferValue<typeof SETTLED_STATUS>;
 
-  expectType<BasicEnum<'fulfilled' | 'rejected'>>(SETTLED_STATUS);
+  expectType<SimpleEnum<'fulfilled' | 'rejected'>>(SETTLED_STATUS);
 
   void function (status: SettledStatus) {
     expectType<'fulfilled' | 'rejected'>(status);
@@ -28,7 +28,7 @@ test('basic enum', () => {
 
   expectType<typeof STATUS>(Enum.exclude(STATUS, []));
 
-  expectType<BasicEnum<never>>(Enum.exclude(STATUS, STATUS.values()));
+  expectType<SimpleEnum<never>>(Enum.exclude(STATUS, STATUS.values()));
 });
 
 test('labeled enum - remove by key', () => {

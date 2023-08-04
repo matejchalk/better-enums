@@ -1,15 +1,15 @@
 import { create } from './create';
 import type {
-  BasicEnum,
-  BasicEnumExtended,
   LabeledEnum,
   LabeledEnumExtended,
+  SimpleEnum,
+  SimpleEnumExtended,
 } from './types';
 
 export function extend<
-  TEnum extends BasicEnum<string | number>,
+  TEnum extends SimpleEnum<string | number>,
   TExtra extends string | number
->(srcEnum: TEnum, extraValues: TExtra[]): BasicEnumExtended<TEnum, TExtra>;
+>(srcEnum: TEnum, extraValues: TExtra[]): SimpleEnumExtended<TEnum, TExtra>;
 
 export function extend<
   TEnum extends LabeledEnum<Record<string, string | number>>,
@@ -18,7 +18,7 @@ export function extend<
 
 export function extend(
   srcEnum:
-    | BasicEnum<string | number>
+    | SimpleEnum<string | number>
     | LabeledEnum<Record<string, string | number>>,
   extras: (string | number)[] | Record<string, string | number>
 ) {

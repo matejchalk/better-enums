@@ -6,7 +6,7 @@ describe('Enum.extend', () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
-  describe('basic enum', () => {
+  describe('simple enum', () => {
     const STATUS = Enum(['alive', 'dead']);
     const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
     type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
@@ -119,7 +119,7 @@ describe('Enum.extend', () => {
     });
   });
 
-  describe('labeled enum to basic enum', () => {
+  describe('labeled enum to simple enum', () => {
     const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
     const EXTENDED_LOCALE = Enum.extend(LOCALE, ['de']);
     type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;

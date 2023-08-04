@@ -38,7 +38,7 @@
 </ul>
 </li>
 </ul>
-<p>Each function has different overloads to support creating both basic and labeled enums.</p>
+<p>Each function has different overloads to support creating both simple and labeled enums.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></section>
 <section class="tsd-panel tsd-hierarchy">
@@ -47,9 +47,9 @@
 <li><span class="target">IEnum</span></li></ul></section>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="IEnum"><span class="tsd-kind-call-signature">IEnum</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#IEnum" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="IEnum"><span class="tsd-kind-call-signature">IEnum</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/SimpleEnum.html" class="tsd-signature-type tsd-kind-type-alias">SimpleEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#IEnum" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a basic enum from an array of values.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a simple enum from an array of values.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
@@ -67,14 +67,14 @@
 <div class="tsd-comment tsd-typography"><p>Array of all values.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Basic enum object.</p>
+<h4 class="tsd-returns-title">Returns <a href="../types/SimpleEnum.html" class="tsd-signature-type tsd-kind-type-alias">SimpleEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Simple enum object.</p>
 
 <div class="tsd-comment tsd-typography">
 <h4>Example</h4><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">ROLE</span><span class="hl-1"> = </span><span class="hl-0">Enum</span><span class="hl-1">([</span><span class="hl-2">&#39;viewer&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;editor&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;owner&#39;</span><span class="hl-1">]);</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L22">src/types.ts:22</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L22">src/types.ts:22</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="IEnum-1"><span class="tsd-kind-call-signature">IEnum</span><span class="tsd-signature-symbol">&lt;</span>const <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">obj</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/LabeledEnum.html" class="tsd-signature-type tsd-kind-type-alias">LabeledEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#IEnum-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a labeled enum from an object.</p>
@@ -102,7 +102,7 @@
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L38">src/types.ts:38</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L38">src/types.ts:38</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -118,16 +118,16 @@
 <section class="tsd-panel tsd-member"><a id="extend" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>extend</span><a href="#extend" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="extend.extend-1"><span class="tsd-kind-call-signature">extend</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">extraValues</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">BasicEnumExtended</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><a href="#extend.extend-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="extend.extend-1"><span class="tsd-kind-call-signature">extend</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">extraValues</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">SimpleEnumExtended</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><a href="#extend.extend-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a basic enum by adding values to another enum.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a simple enum by adding values to another enum.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol"> extends </span><a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-<div class="tsd-comment tsd-typography"><p>Type of basic enum or labeled enum.</p>
+<h4><span class="tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol"> extends </span><a href="../types/SimpleEnum.html" class="tsd-signature-type tsd-kind-type-alias">SimpleEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><p>Type of simple enum or labeled enum.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
@@ -140,7 +140,7 @@
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">srcEnum</span>: <span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span></h5>
-<div class="tsd-comment tsd-typography"><p>Source enum object (basic or labeled).</p>
+<div class="tsd-comment tsd-typography"><p>Source enum object (simple or labeled).</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
@@ -148,14 +148,14 @@
 <div class="tsd-comment tsd-typography"><p>Values to be added.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">BasicEnumExtended</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Basic enum object.</p>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">SimpleEnumExtended</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Simple enum object.</p>
 
 <div class="tsd-comment tsd-typography">
 <h4>Example</h4><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">STATUS</span><span class="hl-1"> = </span><span class="hl-0">Enum</span><span class="hl-1">([</span><span class="hl-2">&#39;alive&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;dead&#39;</span><span class="hl-1">]);</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">INFECTED_STATUS</span><span class="hl-1"> = </span><span class="hl-4">Enum</span><span class="hl-1">.</span><span class="hl-0">extend</span><span class="hl-1">(</span><span class="hl-6">STATUS</span><span class="hl-1">, [</span><span class="hl-2">&#39;zombie&#39;</span><span class="hl-1">]);</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L53">src/types.ts:53</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L53">src/types.ts:53</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="extend.extend-2"><span class="tsd-kind-call-signature">extend</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span>const <span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">extraObj</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">LabeledEnumExtended</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TExtra</span><span class="tsd-signature-symbol">&gt;</span><a href="#extend.extend-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a labeled enum by adding keys and values to another enum.</p>
@@ -193,7 +193,7 @@
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L74">src/types.ts:74</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L74">src/types.ts:74</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="exclude" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>exclude</span><a href="#exclude" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -234,7 +234,7 @@
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L95">src/types.ts:95</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L95">src/types.ts:95</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="exclude.exclude-2"><span class="tsd-kind-call-signature">exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">LabeledEnumExcludedByValues</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><a href="#exclude.exclude-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a labeled enum by removing values from another enum.</p>
@@ -272,17 +272,17 @@
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L116">src/types.ts:116</a></li></ul></aside></li>
-<li class="tsd-signature tsd-anchor-link" id="exclude.exclude-3"><span class="tsd-kind-call-signature">exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">BasicEnumExcluded</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><a href="#exclude.exclude-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L116">src/types.ts:116</a></li></ul></aside></li>
+<li class="tsd-signature tsd-anchor-link" id="exclude.exclude-3"><span class="tsd-kind-call-signature">exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">srcEnum</span>, <span class="tsd-kind-parameter">values</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">SimpleEnumExcluded</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span><a href="#exclude.exclude-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a basic enum by removing values from another enum.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a simple enum by removing values from another enum.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol"> extends </span><a href="../types/BasicEnum.html" class="tsd-signature-type tsd-kind-type-alias">BasicEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-<div class="tsd-comment tsd-typography"><p>Type of basic enum.</p>
+<h4><span class="tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol"> extends </span><a href="../types/SimpleEnum.html" class="tsd-signature-type tsd-kind-type-alias">SimpleEnum</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><p>Type of simple enum.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
@@ -295,7 +295,7 @@
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">srcEnum</span>: <span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span></h5>
-<div class="tsd-comment tsd-typography"><p>Source basic enum object.</p>
+<div class="tsd-comment tsd-typography"><p>Source simple enum object.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
@@ -303,14 +303,14 @@
 <div class="tsd-comment tsd-typography"><p>Array of values to remove.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">BasicEnumExcluded</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Basic enum object.</p>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">SimpleEnumExcluded</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TEnum</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Simple enum object.</p>
 
 <div class="tsd-comment tsd-typography">
 <h4>Example</h4><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">STATUS</span><span class="hl-1"> = </span><span class="hl-0">Enum</span><span class="hl-1">([</span><span class="hl-2">&#39;pending&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;fulfilled&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;rejected&#39;</span><span class="hl-1">]);</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">SETTLED_STATUS</span><span class="hl-1"> = </span><span class="hl-4">Enum</span><span class="hl-1">.</span><span class="hl-0">exclude</span><span class="hl-1">(</span><span class="hl-6">STATUS</span><span class="hl-1">, [</span><span class="hl-2">&#39;pending&#39;</span><span class="hl-1">]);</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/495e56f/src/types.ts#L137">src/types.ts:137</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/matejchalk/better-enums/blob/ab3e370/src/types.ts#L137">src/types.ts:137</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
@@ -326,15 +326,15 @@
 <li><a href="IEnum.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg>
 <div>IEnum
 <div class="menu-item-desc">Core `Enum` object.</div></div></a></li>
-<li><a href="../types/BasicEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg>
-<div>Basic<wbr/>Enum
+<li><a href="../types/SimpleEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg>
+<div>Simple<wbr/>Enum
 <div class="menu-item-desc">Enum object created from a list of values.</div></div></a></li>
 <li><a href="../types/LabeledEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Labeled<wbr/>Enum
 <div class="menu-item-desc">Enum object created from a map of key-value pairs.</div></div></a></li>
 <li><a href="../types/InferValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Infer<wbr/>Value
-<div class="menu-item-desc">Utility type to infer type of value for a basic or labeled enum.</div></div></a></li>
+<div class="menu-item-desc">Utility type to infer type of value for a simple or labeled enum.</div></div></a></li>
 <li><a href="../types/InferKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Infer<wbr/>Key
 <div class="menu-item-desc">Utility type to infer type of key for a labeled enum.</div></div></a></li></ul></nav></div></div></div>

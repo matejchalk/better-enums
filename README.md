@@ -25,7 +25,7 @@ Many in the TypeScript community consider using TypeScript's **built-in `enum` k
 
 This library provides a custom enum implementation which attempts to **avoid the pitfalls of TS enums**, while also **enhancing unions with runtime features**.
 
-These "better enums" are created either from an array of values (a "**basic enum**") or an object mapping keys to values (a "**labeled enum**"), with a union type then being automatically inferred from these values. This pattern is the commonly recommended alternative to the `enum` keyword. Using this library has the advantage of encapsulating some of the necessary TypeScript magic that can be daunting for less experienced TypeScript programmers.
+These "better enums" are created either from an array of values (a "**simple enum**") or an object mapping keys to values (a "**labeled enum**"), with a union type then being automatically inferred from these values. This pattern is the commonly recommended alternative to the `enum` keyword. Using this library has the advantage of encapsulating some of the necessary TypeScript magic that can be daunting for less experienced TypeScript programmers.
 
 The labeled enums offer good compatibilty with built-in enums. Since they support the same dot syntax and can even be created from an existing built-in enum, migrating away from the `enum` keyword should be fairly straightforward for existing projects.
 
@@ -60,9 +60,9 @@ pnpm add better-enums
 
 ### Creating enums
 
-#### Basic enums
+#### Simple enums
 
-Import the `Enum` callable object to create a basic enum and infer its union type with the `InferValue` utility type:
+Import the `Enum` callable object to create a simple enum and infer its union type with the `InferValue` utility type:
 
 ```ts
 import { Enum, type InferValue } from 'better-enums';
@@ -142,7 +142,7 @@ createUser('john.doe@example.com', Role.Admin);
 createUser('john.doe@example.com', 'admin');
 ```
 
-Labeled enums support all the methods of basic enums (e.g. `.values()` or `.hasValue(x)`), as well as additional methods:
+Labeled enums support all the methods of simple enums (e.g. `.values()` or `.hasValue(x)`), as well as additional methods:
 
 - list all keys with `.keys()`,
 - check key with `.hasKey(x)` or `.assertKey(x)`,
@@ -156,7 +156,7 @@ In addition to creating brand new enums, you can easily derive new enums from ex
 
 #### Adding values (`Enum.extend`)
 
-To add values to a basic enum, pass in an array of values:
+To add values to a simple enum, pass in an array of values:
 
 ```ts
 const ROLE = Enum(['viewer', 'editor', 'admin']);
@@ -187,7 +187,7 @@ const ENHANCED_ROLE = Enum({
 */
 ```
 
-If you pass in an array of values for a labeled enum, the result will be a basic enum:
+If you pass in an array of values for a labeled enum, the result will be a simple enum:
 
 ```ts
 const ROLE = Enum({
@@ -202,7 +202,7 @@ const ENHANCED_ROLE = Enum.extend(ROLE, ['superadmin']);
 
 #### Removing values (`Enum.exclude`)
 
-To remove values from a basic enum, pass in an array of values:
+To remove values from a simple enum, pass in an array of values:
 
 ```ts
 const ROLE = Enum(['viewer', 'editor', 'admin']);

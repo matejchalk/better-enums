@@ -6,7 +6,7 @@ describe('Enum.exclude', () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
-  describe('basic enum', () => {
+  describe('simple enum', () => {
     const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
     const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
     type SettledStatus = InferValue<typeof SETTLED_STATUS>;

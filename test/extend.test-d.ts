@@ -1,12 +1,12 @@
 import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
-import { BasicEnum, Enum, InferKey, InferValue, LabeledEnum } from '../src';
+import { Enum, InferKey, InferValue, LabeledEnum, SimpleEnum } from '../src';
 
-test('basic enum', () => {
+test('simple enum', () => {
   const STATUS = Enum(['alive', 'dead']);
   const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
   type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
 
-  expectType<BasicEnum<'alive' | 'dead' | 'zombie'>>(INFECTED_STATUS);
+  expectType<SimpleEnum<'alive' | 'dead' | 'zombie'>>(INFECTED_STATUS);
 
   void function (status: InfectedStatus) {
     expectType<'alive' | 'dead' | 'zombie'>(status);
@@ -56,12 +56,12 @@ test('labeled enum', () => {
   expectType<typeof LOCALE>(Enum.extend(LOCALE, {}));
 });
 
-test('labeled enum to basic enum', () => {
+test('labeled enum to simple enum', () => {
   const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
   const EXTENDED_LOCALE = Enum.extend(LOCALE, ['de']);
   type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
-  expectType<BasicEnum<'en' | 'cs' | 'sk' | 'de'>>(EXTENDED_LOCALE);
+  expectType<SimpleEnum<'en' | 'cs' | 'sk' | 'de'>>(EXTENDED_LOCALE);
 
   void function (locale: ExtendedLocale) {
     expectType<'en' | 'cs' | 'sk' | 'de'>(locale);
@@ -69,6 +69,6 @@ test('labeled enum to basic enum', () => {
 
   expectNotAssignable<LabeledEnum<any>>(EXTENDED_LOCALE);
 
-  expectType<BasicEnum<InferValue<typeof LOCALE>>>(Enum.extend(LOCALE, []));
+  expectType<SimpleEnum<InferValue<typeof LOCALE>>>(Enum.extend(LOCALE, []));
   expectNotAssignable<typeof LOCALE>(Enum.extend(LOCALE, []));
 });

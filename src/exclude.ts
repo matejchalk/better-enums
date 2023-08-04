@@ -1,12 +1,12 @@
 import { create } from './create';
 import type {
-  BasicEnum,
-  BasicEnumExcluded,
   InferKey,
   InferValue,
   LabeledEnum,
   LabeledEnumExcludedByKeys,
   LabeledEnumExcludedByValues,
+  SimpleEnum,
+  SimpleEnumExcluded,
 } from './types';
 
 export function exclude<
@@ -20,13 +20,13 @@ export function exclude<
 >(srcEnum: TEnum, values: TValue[]): LabeledEnumExcludedByValues<TEnum, TValue>;
 
 export function exclude<
-  TEnum extends BasicEnum<string | number>,
+  TEnum extends SimpleEnum<string | number>,
   TValue extends InferValue<TEnum>
->(srcEnum: TEnum, values: TValue[]): BasicEnumExcluded<TEnum, TValue>;
+>(srcEnum: TEnum, values: TValue[]): SimpleEnumExcluded<TEnum, TValue>;
 
 export function exclude(
   srcEnum:
-    | BasicEnum<string | number>
+    | SimpleEnum<string | number>
     | LabeledEnum<Record<string, string | number>>,
   items: (string | number)[]
 ) {

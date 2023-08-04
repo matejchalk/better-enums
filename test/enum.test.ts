@@ -6,7 +6,7 @@ describe('Enum', () => {
     await expectTypeTestsToPassAsync(__filename);
   });
 
-  describe('basic enum', () => {
+  describe('simple enum', () => {
     const ROLE = Enum(['viewer', 'editor', 'owner']);
     type Role = InferValue<typeof ROLE>;
 
