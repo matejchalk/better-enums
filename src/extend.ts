@@ -1,26 +1,27 @@
 import { create } from './create';
 import type {
-  LabeledEnum,
+  AnyLabeledEnum,
+  AnySimpleEnum,
+  EnumPrimitive,
+  EnumSource,
+  EnumSourceObject,
   LabeledEnumExtended,
-  SimpleEnum,
   SimpleEnumExtended,
 } from './types';
 
 export function extend<
-  TEnum extends SimpleEnum<string | number>,
-  TExtra extends string | number
+  TEnum extends AnySimpleEnum,
+  TExtra extends EnumPrimitive
 >(srcEnum: TEnum, extraValues: TExtra[]): SimpleEnumExtended<TEnum, TExtra>;
 
 export function extend<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
-  const TExtra extends Record<string, string | number>
+  TEnum extends AnyLabeledEnum,
+  const TExtra extends EnumSourceObject
 >(srcEnum: TEnum, extraObj: TExtra): LabeledEnumExtended<TEnum, TExtra>;
 
 export function extend(
-  srcEnum:
-    | SimpleEnum<string | number>
-    | LabeledEnum<Record<string, string | number>>,
-  extras: (string | number)[] | Record<string, string | number>
+  srcEnum: AnySimpleEnum | AnyLabeledEnum,
+  extras: EnumSource
 ) {
   if (Array.isArray(extras)) {
     return create([...srcEnum.values(), ...extras]);

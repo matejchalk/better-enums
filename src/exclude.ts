@@ -1,34 +1,33 @@
 import { create } from './create';
 import type {
+  AnyLabeledEnum,
+  AnySimpleEnum,
+  EnumPrimitive,
   InferKey,
   InferValue,
-  LabeledEnum,
   LabeledEnumExcludedByKeys,
   LabeledEnumExcludedByValues,
-  SimpleEnum,
   SimpleEnumExcluded,
 } from './types';
 
 export function exclude<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TEnum extends AnyLabeledEnum,
   TKey extends InferKey<TEnum>
 >(srcEnum: TEnum, keys: TKey[]): LabeledEnumExcludedByKeys<TEnum, TKey>;
 
 export function exclude<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TEnum extends AnyLabeledEnum,
   TValue extends InferValue<TEnum>
 >(srcEnum: TEnum, values: TValue[]): LabeledEnumExcludedByValues<TEnum, TValue>;
 
 export function exclude<
-  TEnum extends SimpleEnum<string | number>,
+  TEnum extends AnySimpleEnum,
   TValue extends InferValue<TEnum>
 >(srcEnum: TEnum, values: TValue[]): SimpleEnumExcluded<TEnum, TValue>;
 
 export function exclude(
-  srcEnum:
-    | SimpleEnum<string | number>
-    | LabeledEnum<Record<string, string | number>>,
-  items: (string | number)[]
+  srcEnum: AnySimpleEnum | AnyLabeledEnum,
+  items: EnumPrimitive[]
 ) {
   if ('keys' in srcEnum) {
     if (items.every(item => item in srcEnum.accessor)) {

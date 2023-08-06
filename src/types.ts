@@ -19,7 +19,7 @@ export interface IEnum {
    * @template T Type of values (union of strings or numbers).
    * @returns Simple enum object.
    */
-  <T extends string | number>(values: T[]): SimpleEnum<T>;
+  <T extends EnumPrimitive>(values: T[]): SimpleEnum<T>;
 
   /**
    * Creates a labeled enum from an object.
@@ -35,7 +35,7 @@ export interface IEnum {
    * @template T Object type (defining types of keys and correspoding values).
    * @returns Labeled enum object.
    */
-  <const T extends Record<string, string | number>>(obj: T): LabeledEnum<T>;
+  <const T extends EnumSourceObject>(obj: T): LabeledEnum<T>;
 
   /**
    * Creates a simple enum by adding values to another enum.
@@ -50,10 +50,7 @@ export interface IEnum {
    * @template TExtra Type of added values (union of strings or numbers).
    * @returns Simple enum object.
    */
-  extend<
-    TEnum extends SimpleEnum<string | number>,
-    TExtra extends string | number
-  >(
+  extend<TEnum extends AnySimpleEnum, TExtra extends EnumPrimitive>(
     srcEnum: TEnum,
     extraValues: TExtra[]
   ): SimpleEnumExtended<TEnum, TExtra>;
@@ -71,10 +68,7 @@ export interface IEnum {
    * @template TExtra Object type (defining types of added keys and correspoding values).
    * @returns Labeled enum object.
    */
-  extend<
-    TEnum extends LabeledEnum<Record<string, string | number>>,
-    const TExtra extends Record<string, string | number>
-  >(
+  extend<TEnum extends AnyLabeledEnum, const TExtra extends EnumSourceObject>(
     srcEnum: TEnum,
     extraObj: TExtra
   ): LabeledEnumExtended<TEnum, TExtra>;
@@ -92,10 +86,7 @@ export interface IEnum {
    * @template TKey Type of keys to be removed.
    * @returns Labeled enum object.
    */
-  exclude<
-    TEnum extends LabeledEnum<Record<string, string | number>>,
-    TKey extends InferKey<TEnum>
-  >(
+  exclude<TEnum extends AnyLabeledEnum, TKey extends InferKey<TEnum>>(
     srcEnum: TEnum,
     keys: TKey[]
   ): LabeledEnumExcludedByKeys<TEnum, TKey>;
@@ -113,10 +104,7 @@ export interface IEnum {
    * @template TValue Type of values to be removed.
    * @returns Labeled enum object.
    */
-  exclude<
-    TEnum extends LabeledEnum<Record<string, string | number>>,
-    TValue extends InferValue<TEnum>
-  >(
+  exclude<TEnum extends AnyLabeledEnum, TValue extends InferValue<TEnum>>(
     srcEnum: TEnum,
     values: TValue[]
   ): LabeledEnumExcludedByValues<TEnum, TValue>;
@@ -134,10 +122,7 @@ export interface IEnum {
    * @template TValue Type of values to be removed.
    * @returns Simple enum object.
    */
-  exclude<
-    TEnum extends SimpleEnum<string | number>,
-    TValue extends InferValue<TEnum>
-  >(
+  exclude<TEnum extends AnySimpleEnum, TValue extends InferValue<TEnum>>(
     srcEnum: TEnum,
     values: TValue[]
   ): SimpleEnumExcluded<TEnum, TValue>;
@@ -151,7 +136,7 @@ export interface IEnum {
  *
  * @template T Type of value (union of strings or numbers).
  */
-export type SimpleEnum<T extends string | number> = {
+export type SimpleEnum<T extends EnumPrimitive> = {
   /**
    * Object mapping keys to values (mutations prevented with `Object.freeze`).
    * Can be used for accessing values by keys using dot syntax.
@@ -199,62 +184,64 @@ export type SimpleEnum<T extends string | number> = {
  *
  * @template T Object type (defining types of keys and correspoding values).
  */
-export type LabeledEnum<T extends Record<string | number, string | number>> =
-  Omit<SimpleEnum<T[keyof T]>, 'accessor'> & {
-    /**
-     * Lists all keys.
-     * @returns Array of keys (similar to `Object.keys`).
-     */
-    keys: () => (keyof T)[];
-    /**
-     * Checks if key is contained in enum's keys.
-     * @param key Value with unknown type.
-     * @returns Boolean (`true` if valid enum key, otherwise `false`).
-     */
-    hasKey: (key: unknown) => key is keyof T;
-    /**
-     * Checks if key is contained in enum's keys.
-     * @param key Value with unknown type.
-     * @returns Nothing if valid enum key, throws error if invalid.
-     * @throws `RangeError`
-     */
-    assertKey: (key: unknown) => asserts key is keyof T;
-    /**
-     * Lists all key-value pairs.
-     * @returns Array of tuples (similar to `Object.entries`).
-     */
-    entries: () => [keyof T, T[keyof T]][];
-    /**
-     * Checks if key-value pair is contained in enum.
-     * @param entry Value with unknown type.
-     * @returns Nothing if tuple with matching key and value, throws error if invalid.
-     */
-    hasEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
-    /**
-     * Checks if key-value pair is contained in enum.
-     * @param entry Value with unknown type.
-     * @returns Boolean (`true` if tuple with matching key and value, otherwise `false`).
-     * @throws `RangeError`
-     */
-    assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
-    /**
-     * Object mapping keys to values (mutations prevented with `Object.freeze`).
-     * Can be used to enable for accessing values by keys using dot syntax.
-     *
-     * @example
-     * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-     * const Locale = LOCALE.accessor;
-     *
-     * const locale = Locale.Czech; // locale is 'cs'
-     */
-    accessor: T;
-    /**
-     * Access key for given value.
-     * @param value Enum value.
-     * @returns Enum key matching given value.
-     */
-    keyOf: <V extends EnumToUnion<T[keyof T]>>(value: V) => Invert<T>[V];
-  };
+export type LabeledEnum<T extends EnumSourceObject> = Omit<
+  SimpleEnum<T[keyof T]>,
+  'accessor'
+> & {
+  /**
+   * Lists all keys.
+   * @returns Array of keys (similar to `Object.keys`).
+   */
+  keys: () => (keyof T)[];
+  /**
+   * Checks if key is contained in enum's keys.
+   * @param key Value with unknown type.
+   * @returns Boolean (`true` if valid enum key, otherwise `false`).
+   */
+  hasKey: (key: unknown) => key is keyof T;
+  /**
+   * Checks if key is contained in enum's keys.
+   * @param key Value with unknown type.
+   * @returns Nothing if valid enum key, throws error if invalid.
+   * @throws `RangeError`
+   */
+  assertKey: (key: unknown) => asserts key is keyof T;
+  /**
+   * Lists all key-value pairs.
+   * @returns Array of tuples (similar to `Object.entries`).
+   */
+  entries: () => [keyof T, T[keyof T]][];
+  /**
+   * Checks if key-value pair is contained in enum.
+   * @param entry Value with unknown type.
+   * @returns Nothing if tuple with matching key and value, throws error if invalid.
+   */
+  hasEntry: (entry: unknown) => entry is [keyof T, T[keyof T]];
+  /**
+   * Checks if key-value pair is contained in enum.
+   * @param entry Value with unknown type.
+   * @returns Boolean (`true` if tuple with matching key and value, otherwise `false`).
+   * @throws `RangeError`
+   */
+  assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
+  /**
+   * Object mapping keys to values (mutations prevented with `Object.freeze`).
+   * Can be used to enable for accessing values by keys using dot syntax.
+   *
+   * @example
+   * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+   * const Locale = LOCALE.accessor;
+   *
+   * const locale = Locale.Czech; // locale is 'cs'
+   */
+  accessor: T;
+  /**
+   * Access key for given value.
+   * @param value Enum value.
+   * @returns Enum key matching given value.
+   */
+  keyOf: <V extends EnumToUnion<T[keyof T]>>(value: V) => Invert<T>[V];
+};
 
 /**
  * Utility type to infer type of value for a simple or labeled enum.
@@ -268,11 +255,9 @@ export type LabeledEnum<T extends Record<string | number, string | number>> =
  *
  * @template T Type of simple enum or labeled enum.
  */
-export type InferValue<
-  T extends
-    | SimpleEnum<string | number>
-    | LabeledEnum<Record<string | number, string | number>>
-> = EnumToUnion<ReturnType<T['values']>[number]>;
+export type InferValue<T extends AnySimpleEnum | AnyLabeledEnum> = EnumToUnion<
+  ReturnType<T['values']>[number]
+>;
 
 /**
  * Utility type to infer type of key for a labeled enum.
@@ -283,10 +268,11 @@ export type InferValue<
  *
  * @template T Type of labeled enum.
  */
-export type InferKey<T extends LabeledEnum<Record<string, string | number>>> =
-  EnumToUnion<ReturnType<T['keys']>[number]>;
+export type InferKey<T extends AnyLabeledEnum> = EnumToUnion<
+  ReturnType<T['keys']>[number]
+>;
 
-type EnumToUnion<T extends string | number> = T extends string ? `${T}` : T;
+type EnumToUnion<T extends EnumPrimitive> = T extends string ? `${T}` : T;
 
 type Invert<T extends Record<PropertyKey, PropertyKey>> = {
   [K in keyof T as T[K]]: K;
@@ -296,28 +282,35 @@ type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
+export type EnumPrimitive = string | number;
+export type EnumSourceObject = Record<EnumPrimitive, EnumPrimitive>;
+export type EnumSource = EnumPrimitive[] | EnumSourceObject;
+
+export type AnySimpleEnum = SimpleEnum<EnumPrimitive>;
+export type AnyLabeledEnum = LabeledEnum<EnumSourceObject>;
+
 export type SimpleEnumExtended<
-  TEnum extends SimpleEnum<string | number>,
-  TExtra extends string | number
+  TEnum extends AnySimpleEnum,
+  TExtra extends EnumPrimitive
 > = SimpleEnum<InferValue<TEnum> | TExtra>;
 
 export type LabeledEnumExtended<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
-  TExtra extends Record<string, string | number>
+  TEnum extends AnyLabeledEnum,
+  TExtra extends EnumSourceObject
 > = LabeledEnum<Prettify<TEnum['accessor'] & TExtra>>;
 
 export type SimpleEnumExcluded<
-  TEnum extends SimpleEnum<string | number>,
+  TEnum extends AnySimpleEnum,
   TValue extends InferValue<TEnum>
 > = SimpleEnum<Exclude<InferValue<TEnum>, TValue>>;
 
 export type LabeledEnumExcludedByKeys<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TEnum extends AnyLabeledEnum,
   TKey extends InferKey<TEnum>
 > = LabeledEnum<Prettify<Omit<TEnum['accessor'], TKey>>>;
 
 export type LabeledEnumExcludedByValues<
-  TEnum extends LabeledEnum<Record<string, string | number>>,
+  TEnum extends AnyLabeledEnum,
   TValue extends InferValue<TEnum>
 > = LabeledEnum<
   Prettify<

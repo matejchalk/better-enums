@@ -1,14 +1,16 @@
-export function createValueGuards<T extends string | number>(values: T[]) {
+import type { EnumPrimitive, EnumSourceObject } from './types';
+
+export function createValueGuards<T extends EnumPrimitive>(values: T[]) {
   return createGuards('Value', values);
 }
 
-export function createKeyGuards<T extends string>(keys: T[]) {
+export function createKeyGuards<T extends EnumPrimitive>(keys: T[]) {
   return createGuards('Key', keys);
 }
 
-export function createEntryGuards<T extends Record<string, string | number>>(
+export function createEntryGuards<T extends EnumSourceObject>(
   obj: T,
-  objInverted: Record<string | number, string>
+  objInverted: EnumSourceObject
 ) {
   return createGuards<[keyof T, T[keyof T]], 'Entry'>('Entry', entry => {
     if (!Array.isArray(entry) || entry.length !== 2) {

@@ -3,26 +3,28 @@ import {
   createKeyGuards,
   createValueGuards,
 } from './guards';
-import type { LabeledEnum, SimpleEnum } from './types';
+import type {
+  EnumPrimitive,
+  EnumSource,
+  EnumSourceObject,
+  LabeledEnum,
+  SimpleEnum,
+} from './types';
 
-export function create<T extends string | number>(values: T[]): SimpleEnum<T>;
+export function create<T extends EnumPrimitive>(values: T[]): SimpleEnum<T>;
 
-export function create<const T extends Record<string, string | number>>(
+export function create<const T extends EnumSourceObject>(
   obj: T
 ): LabeledEnum<T>;
 
-export function create(
-  param: (string | number)[] | Record<string, string | number>
-) {
-  if (Array.isArray(param)) {
-    return createSimpleEnum([...param]);
+export function create(source: EnumSource) {
+  if (Array.isArray(source)) {
+    return createSimpleEnum([...source]);
   }
-  return createLabeledEnum(param);
+  return createLabeledEnum(source);
 }
 
-function createSimpleEnum<T extends string | number>(
-  values: T[]
-): SimpleEnum<T> {
+function createSimpleEnum<T extends EnumPrimitive>(values: T[]): SimpleEnum<T> {
   return {
     accessor: Object.freeze(
       Object.fromEntries(values.map(value => [value, value])) as { [K in T]: K }
@@ -32,7 +34,7 @@ function createSimpleEnum<T extends string | number>(
   };
 }
 
-function createLabeledEnum<const T extends Record<string, string | number>>(
+function createLabeledEnum<const T extends EnumSourceObject>(
   obj: T
 ): LabeledEnum<T> {
   if (
