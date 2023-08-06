@@ -153,6 +153,18 @@ export interface IEnum {
  */
 export type SimpleEnum<T extends string | number> = {
   /**
+   * Object mapping keys to values (mutations prevented with `Object.freeze`).
+   * Can be used for accessing values by keys using dot syntax.
+   * Unlike with labeled enums, a key and its value will always be exactly the same.
+   *
+   * @example
+   * const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
+   * const Status = STATUS.accessor;
+   *
+   * const status = Status.pending; // status is 'pending'
+   */
+  accessor: { readonly [K in T]: K };
+  /**
    * Lists all values.
    * @returns Array of values (safe to mutate).
    */
@@ -187,8 +199,8 @@ export type SimpleEnum<T extends string | number> = {
  *
  * @template T Object type (defining types of keys and correspoding values).
  */
-export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
-  SimpleEnum<T[keyof T]> & {
+export type LabeledEnum<T extends Record<string | number, string | number>> =
+  Omit<SimpleEnum<T[keyof T]>, 'accessor'> & {
     /**
      * Lists all keys.
      * @returns Array of keys (similar to `Object.keys`).
@@ -256,9 +268,11 @@ export type LabeledEnum<T extends Record<PropertyKey, string | number>> =
  *
  * @template T Type of simple enum or labeled enum.
  */
-export type InferValue<T extends SimpleEnum<string | number>> = EnumToUnion<
-  ReturnType<T['values']>[number]
->;
+export type InferValue<
+  T extends
+    | SimpleEnum<string | number>
+    | LabeledEnum<Record<string | number, string | number>>
+> = EnumToUnion<ReturnType<T['values']>[number]>;
 
 /**
  * Utility type to infer type of key for a labeled enum.

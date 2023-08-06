@@ -11,6 +11,15 @@ describe('Enum.exclude', () => {
     const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
     type SettledStatus = InferValue<typeof SETTLED_STATUS>;
 
+    test('accessor', () => {
+      expect(SETTLED_STATUS.accessor).toEqual<
+        (typeof SETTLED_STATUS)['accessor']
+      >({
+        fulfilled: 'fulfilled',
+        rejected: 'rejected',
+      });
+    });
+
     test('values', () => {
       expect(SETTLED_STATUS.values()).toEqual<SettledStatus[]>([
         'fulfilled',

@@ -11,6 +11,16 @@ describe('Enum.extend', () => {
     const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
     type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
 
+    test('accessor', () => {
+      expect(INFECTED_STATUS.accessor).toEqual<
+        (typeof INFECTED_STATUS)['accessor']
+      >({
+        alive: 'alive',
+        dead: 'dead',
+        zombie: 'zombie',
+      });
+    });
+
     test('values', () => {
       expect(INFECTED_STATUS.values()).toEqual<InfectedStatus[]>([
         'alive',
@@ -126,6 +136,7 @@ describe('Enum.extend', () => {
 
     test('no additional properties', () => {
       expect(EXTENDED_LOCALE).toEqual<typeof EXTENDED_LOCALE>({
+        accessor: expect.any(Object),
         values: expect.any(Function),
         hasValue: expect.any(Function),
         assertValue: expect.any(Function),

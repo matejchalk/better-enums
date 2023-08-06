@@ -80,6 +80,21 @@ type User = {
 };
 ```
 
+If you prefer an enum-style syntax for accessing values, you can use the `.accessor` property (keys match values exactly):
+
+```ts
+const ROLE = Enum(['Viewer', 'Editor', 'Admin']);
+type Role = InferValue<typeof ROLE>;
+const Role = ROLE.accessor;
+
+// ...
+
+let role: Role;
+// these are equivalent
+role = Role.Admin;
+role = 'Admin';
+```
+
 The enum object enables you to use runtime features:
 
 - list all values with `.values()`:

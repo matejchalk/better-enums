@@ -4,6 +4,7 @@ import { Enum, InferKey, InferValue, SimpleEnum } from '../src';
 test('simple enum', () => {
   const ROLE = Enum(['viewer', 'editor', 'owner']);
   type Role = InferValue<typeof ROLE>;
+  const Role = ROLE.accessor;
 
   void function (role: Role) {
     expectType<'viewer' | 'editor' | 'owner'>(role);
@@ -22,6 +23,12 @@ test('simple enum', () => {
     ROLE_EXPLICIT.assertValue(possibleRole);
     expectType<Role>(possibleRole);
   };
+
+  expectType<{
+    readonly viewer: 'viewer';
+    readonly editor: 'editor';
+    readonly owner: 'owner';
+  }>(Role);
 });
 
 test('labeled enum', () => {
@@ -83,6 +90,8 @@ test('from TypeScript string enum', () => {
   void function (invalidAction: 'allowed') {
     expectNotAssignable<Action>(invalidAction);
   };
+
+  expect<'Block'>(ACTION.keyOf('block'));
 });
 
 test('from TypeScript number enum', () => {
@@ -102,4 +111,6 @@ test('from TypeScript number enum', () => {
   void function (invalidLevel: 3) {
     expectNotAssignable<Level>(invalidLevel);
   };
+
+  expectType<'warn'>(LEVEL.keyOf(1));
 });

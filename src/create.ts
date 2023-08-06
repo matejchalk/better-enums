@@ -24,6 +24,9 @@ function createSimpleEnum<T extends string | number>(
   values: T[]
 ): SimpleEnum<T> {
   return {
+    accessor: Object.freeze(
+      Object.fromEntries(values.map(value => [value, value])) as { [K in T]: K }
+    ),
     values: () => values,
     ...createValueGuards(values),
   };

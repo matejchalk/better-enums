@@ -10,6 +10,14 @@ describe('Enum', () => {
     const ROLE = Enum(['viewer', 'editor', 'owner']);
     type Role = InferValue<typeof ROLE>;
 
+    test('accessor', () => {
+      expect(ROLE.accessor).toEqual({
+        viewer: 'viewer',
+        editor: 'editor',
+        owner: 'owner',
+      });
+    });
+
     test('values', () => {
       expect(ROLE.values()).toEqual<Role[]>(['viewer', 'editor', 'owner']);
     });
