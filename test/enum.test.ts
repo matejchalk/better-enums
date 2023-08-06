@@ -44,6 +44,14 @@ describe('Enum', () => {
     });
     type Language = InferValue<typeof LANGUAGE>;
 
+    test('accessor', () => {
+      expect(LANGUAGE.accessor).toEqual({
+        en: 'English',
+        cs: 'Čeština',
+        es: 'Español',
+      });
+    });
+
     test('values', () => {
       expect(LANGUAGE.values()).toEqual<Language[]>([
         'English',
@@ -108,14 +116,6 @@ describe('Enum', () => {
       );
     });
 
-    test('accessor', () => {
-      expect(LANGUAGE.accessor).toEqual({
-        en: 'English',
-        cs: 'Čeština',
-        es: 'Español',
-      });
-    });
-
     test('keyOf', () => {
       expect(LANGUAGE.keyOf('English')).toBe('en');
       expect(LANGUAGE.keyOf('Español')).toBe('es');
@@ -128,6 +128,13 @@ describe('Enum', () => {
       Block = 'block',
     }
     const ACTION = Enum(Action);
+
+    test('accessor', () => {
+      expect(ACTION.accessor).toEqual({
+        Allow: 'allow',
+        Block: 'block',
+      });
+    });
 
     test('values', () => {
       expect(ACTION.values()).toEqual<InferValue<typeof ACTION>[]>([
@@ -159,13 +166,6 @@ describe('Enum', () => {
         ['Allow', 'allow'],
         ['Block', 'block'],
       ]);
-    });
-
-    test('accessor', () => {
-      expect(ACTION.accessor).toEqual({
-        Allow: 'allow',
-        Block: 'block',
-      });
     });
 
     test('keyOf', () => {

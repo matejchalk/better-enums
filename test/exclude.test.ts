@@ -43,7 +43,13 @@ describe('Enum.exclude', () => {
   describe('labeled enum - remove by key', () => {
     const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
     const ERROR_LEVEL = Enum.exclude(LEVEL, ['off']);
-    type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
+
+    test('accessor', () => {
+      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
+        warn: 1,
+        error: 2,
+      });
+    });
 
     test('values', () => {
       expect(ERROR_LEVEL.values()).toEqual([1, 2]);
@@ -68,13 +74,6 @@ describe('Enum.exclude', () => {
         ['warn', 1],
         ['error', 2],
       ]);
-    });
-
-    test('accessor', () => {
-      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
-        warn: 1,
-        error: 2,
-      });
     });
 
     test('keyOf', () => {
@@ -85,7 +84,13 @@ describe('Enum.exclude', () => {
   describe('labeled enum - remove by value', () => {
     const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
     const ERROR_LEVEL = Enum.exclude(LEVEL, [0]);
-    type ErrorLevel = InferValue<typeof ERROR_LEVEL>;
+
+    test('accessor', () => {
+      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
+        warn: 1,
+        error: 2,
+      });
+    });
 
     test('values', () => {
       expect(ERROR_LEVEL.values()).toEqual([1, 2]);
@@ -110,13 +115,6 @@ describe('Enum.exclude', () => {
         ['warn', 1],
         ['error', 2],
       ]);
-    });
-
-    test('accessor', () => {
-      expect(ERROR_LEVEL.accessor).toEqual<(typeof ERROR_LEVEL)['accessor']>({
-        warn: 1,
-        error: 2,
-      });
     });
 
     test('keyOf', () => {

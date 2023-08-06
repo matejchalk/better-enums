@@ -173,21 +173,43 @@ export type SimpleEnum<T extends EnumPrimitive> = {
  * Enum object created from a map of key-value pairs.
  *
  * A labeled enum is more similar to a built-in `enum`,
- * because it enables using values indirectly via their keys (dot syntax).
+ * because it distinguishes between keys and values.
  *
- * A labeled enum supports the same methods as a {@link SimpleEnum}:
- * - {@link SimpleEnum.values}
- * - {@link SimpleEnum.hasValue}
- * - {@link SimpleEnum.assertValue}
- *
- * Additional methods are also supported for handling keys and key-value pairs.
+ * A labeled enum supports the same methods as a {@link SimpleEnum},
+ * as well as additional methods for handling keys and key-value pairs.
  *
  * @template T Object type (defining types of keys and correspoding values).
  */
-export type LabeledEnum<T extends EnumSourceObject> = Omit<
-  SimpleEnum<T[keyof T]>,
-  'accessor'
-> & {
+export type LabeledEnum<T extends EnumSourceObject> = {
+  /**
+   * Object mapping keys to values (mutations prevented with `Object.freeze`).
+   * Can be used for accessing values by keys using dot syntax.
+   *
+   * @example
+   * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+   * const Locale = LOCALE.accessor;
+   *
+   * const locale = Locale.Czech; // locale is 'cs'
+   */
+  accessor: T;
+  /**
+   * Lists all values.
+   * @returns Array of values (safe to mutate).
+   */
+  values: () => T[keyof T][];
+  /**
+   * Checks if value is contained in enum's set of values.
+   * @param value Value with unknown type.
+   * @returns Boolean (`true` if valid enum value, otherwise `false`).
+   */
+  hasValue: (value: unknown) => value is T[keyof T];
+  /**
+   * Checks if value is contained in enum's set of values.
+   * @param value Value with unknown type.
+   * @returns Nothing if valid enum value, throws error if invalid.
+   * @throws `RangeError`
+   */
+  assertValue: (value: unknown) => asserts value is T[keyof T];
   /**
    * Lists all keys.
    * @returns Array of keys (similar to `Object.keys`).
@@ -224,17 +246,6 @@ export type LabeledEnum<T extends EnumSourceObject> = Omit<
    * @throws `RangeError`
    */
   assertEntry: (entry: unknown) => asserts entry is [keyof T, T[keyof T]];
-  /**
-   * Object mapping keys to values (mutations prevented with `Object.freeze`).
-   * Can be used to enable for accessing values by keys using dot syntax.
-   *
-   * @example
-   * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-   * const Locale = LOCALE.accessor;
-   *
-   * const locale = Locale.Czech; // locale is 'cs'
-   */
-  accessor: T;
   /**
    * Access key for given value.
    * @param value Enum value.

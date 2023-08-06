@@ -4,7 +4,7 @@
   "basePath": "./",
   "searchInComments": true,
   "sort": ["source-order"],
-  "plugin": ["@mxssfd/typedoc-theme"],
+  "plugin": ["@mxssfd/typedoc-theme", "typedoc-plugin-missing-exports"],
   "theme": "my-theme",
   "includeVersion": true,
   "customCss": "./typedoc-custom-styles.css"

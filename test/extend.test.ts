@@ -48,6 +48,17 @@ describe('Enum.extend', () => {
     const EXTENDED_LOCALE = Enum.extend(LOCALE, { German: 'de' });
     type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
 
+    test('accessor', () => {
+      expect(EXTENDED_LOCALE.accessor).toEqual<
+        (typeof EXTENDED_LOCALE)['accessor']
+      >({
+        English: 'en',
+        Czech: 'cs',
+        Slovak: 'sk',
+        German: 'de',
+      });
+    });
+
     test('values', () => {
       expect(EXTENDED_LOCALE.values()).toEqual<ExtendedLocale[]>([
         'en',
@@ -110,17 +121,6 @@ describe('Enum.extend', () => {
       expect(() => EXTENDED_LOCALE.assertEntry(['German', 'en'])).toThrowError(
         'Enum key and value don\'t match (expected ["German", "de"] or ["English", "en"])'
       );
-    });
-
-    test('accessor', () => {
-      expect(EXTENDED_LOCALE.accessor).toEqual<
-        (typeof EXTENDED_LOCALE)['accessor']
-      >({
-        English: 'en',
-        Czech: 'cs',
-        Slovak: 'sk',
-        German: 'de',
-      });
     });
 
     test('keyOf', () => {
