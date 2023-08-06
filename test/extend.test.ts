@@ -7,13 +7,13 @@ describe('Enum.extend', () => {
   });
 
   describe('simple enum', () => {
-    const STATUS = Enum(['alive', 'dead']);
-    const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
-    type InfectedStatus = InferValue<typeof INFECTED_STATUS>;
+    const STATUSES = Enum(['alive', 'dead']);
+    const INFECTED_STATUSES = Enum.extend(STATUSES, ['zombie']);
+    type InfectedStatus = InferValue<typeof INFECTED_STATUSES>;
 
     test('accessor', () => {
-      expect(INFECTED_STATUS.accessor).toEqual<
-        (typeof INFECTED_STATUS)['accessor']
+      expect(INFECTED_STATUSES.accessor).toEqual<
+        (typeof INFECTED_STATUSES)['accessor']
       >({
         alive: 'alive',
         dead: 'dead',
@@ -22,7 +22,7 @@ describe('Enum.extend', () => {
     });
 
     test('values', () => {
-      expect(INFECTED_STATUS.values()).toEqual<InfectedStatus[]>([
+      expect(INFECTED_STATUSES.values()).toEqual<InfectedStatus[]>([
         'alive',
         'dead',
         'zombie',
@@ -30,27 +30,27 @@ describe('Enum.extend', () => {
     });
 
     test('hasValue', () => {
-      expect(INFECTED_STATUS.hasValue('alive')).toBe(true);
-      expect(INFECTED_STATUS.hasValue('zombie')).toBe(true);
-      expect(INFECTED_STATUS.hasValue('werewolf')).toBe(false);
+      expect(INFECTED_STATUSES.hasValue('alive')).toBe(true);
+      expect(INFECTED_STATUSES.hasValue('zombie')).toBe(true);
+      expect(INFECTED_STATUSES.hasValue('werewolf')).toBe(false);
     });
 
     test('assertValue', () => {
-      expect(() => INFECTED_STATUS.assertValue('zombie')).not.toThrowError();
-      expect(() => INFECTED_STATUS.assertValue(null)).toThrowError(
+      expect(() => INFECTED_STATUSES.assertValue('zombie')).not.toThrowError();
+      expect(() => INFECTED_STATUSES.assertValue(null)).toThrowError(
         'Enum value out of range (received null, expected one of: "alive", "dead", "zombie")'
       );
     });
   });
 
   describe('labeled enum', () => {
-    const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-    const EXTENDED_LOCALE = Enum.extend(LOCALE, { German: 'de' });
-    type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
+    const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+    const EXTENDED_LOCALES = Enum.extend(LOCALES, { German: 'de' });
+    type ExtendedLocale = InferValue<typeof EXTENDED_LOCALES>;
 
     test('accessor', () => {
-      expect(EXTENDED_LOCALE.accessor).toEqual<
-        (typeof EXTENDED_LOCALE)['accessor']
+      expect(EXTENDED_LOCALES.accessor).toEqual<
+        (typeof EXTENDED_LOCALES)['accessor']
       >({
         English: 'en',
         Czech: 'cs',
@@ -60,7 +60,7 @@ describe('Enum.extend', () => {
     });
 
     test('values', () => {
-      expect(EXTENDED_LOCALE.values()).toEqual<ExtendedLocale[]>([
+      expect(EXTENDED_LOCALES.values()).toEqual<ExtendedLocale[]>([
         'en',
         'cs',
         'sk',
@@ -69,38 +69,38 @@ describe('Enum.extend', () => {
     });
 
     test('hasValue', () => {
-      expect(EXTENDED_LOCALE.hasValue('de')).toBe(true);
-      expect(EXTENDED_LOCALE.hasValue(undefined)).toBe(false);
+      expect(EXTENDED_LOCALES.hasValue('de')).toBe(true);
+      expect(EXTENDED_LOCALES.hasValue(undefined)).toBe(false);
     });
 
     test('assertValue', () => {
-      expect(() => EXTENDED_LOCALE.assertValue('de')).not.toThrowError();
-      expect(() => EXTENDED_LOCALE.assertValue('German')).toThrowError(
+      expect(() => EXTENDED_LOCALES.assertValue('de')).not.toThrowError();
+      expect(() => EXTENDED_LOCALES.assertValue('German')).toThrowError(
         'Enum value out of range (received "German", expected one of: "en", "cs", "sk", "de")'
       );
     });
 
     test('keys', () => {
-      expect(EXTENDED_LOCALE.keys()).toEqual<
-        InferKey<typeof EXTENDED_LOCALE>[]
+      expect(EXTENDED_LOCALES.keys()).toEqual<
+        InferKey<typeof EXTENDED_LOCALES>[]
       >(['English', 'Czech', 'Slovak', 'German']);
     });
 
     test('hasKey', () => {
-      expect(EXTENDED_LOCALE.hasKey('German')).toBe(true);
-      expect(EXTENDED_LOCALE.hasKey('de')).toBe(false);
+      expect(EXTENDED_LOCALES.hasKey('German')).toBe(true);
+      expect(EXTENDED_LOCALES.hasKey('de')).toBe(false);
     });
 
     test('assertKey', () => {
-      expect(() => EXTENDED_LOCALE.assertKey('German')).not.toThrowError();
-      expect(() => EXTENDED_LOCALE.assertKey('Deutsch')).toThrowError(
+      expect(() => EXTENDED_LOCALES.assertKey('German')).not.toThrowError();
+      expect(() => EXTENDED_LOCALES.assertKey('Deutsch')).toThrowError(
         'Enum key out of range (received "Deutsch", expected one of: "English", "Czech", "Slovak", "German")'
       );
     });
 
     test('entries', () => {
-      expect(EXTENDED_LOCALE.entries()).toEqual<
-        [InferKey<typeof EXTENDED_LOCALE>, ExtendedLocale][]
+      expect(EXTENDED_LOCALES.entries()).toEqual<
+        [InferKey<typeof EXTENDED_LOCALES>, ExtendedLocale][]
       >([
         ['English', 'en'],
         ['Czech', 'cs'],
@@ -110,32 +110,32 @@ describe('Enum.extend', () => {
     });
 
     test('hasEntry', () => {
-      expect(EXTENDED_LOCALE.hasEntry(['German', 'de'])).toBe(true);
-      expect(EXTENDED_LOCALE.hasEntry('de')).toBe(false);
+      expect(EXTENDED_LOCALES.hasEntry(['German', 'de'])).toBe(true);
+      expect(EXTENDED_LOCALES.hasEntry('de')).toBe(false);
     });
 
     test('assertEntry', () => {
       expect(() =>
-        EXTENDED_LOCALE.assertEntry(['Czech', 'cs'])
+        EXTENDED_LOCALES.assertEntry(['Czech', 'cs'])
       ).not.toThrowError();
-      expect(() => EXTENDED_LOCALE.assertEntry(['German', 'en'])).toThrowError(
+      expect(() => EXTENDED_LOCALES.assertEntry(['German', 'en'])).toThrowError(
         'Enum key and value don\'t match (expected ["German", "de"] or ["English", "en"])'
       );
     });
 
     test('keyOf', () => {
-      expect(EXTENDED_LOCALE.keyOf('de')).toBe('German');
-      expect(EXTENDED_LOCALE.keyOf('sk')).toBe('Slovak');
+      expect(EXTENDED_LOCALES.keyOf('de')).toBe('German');
+      expect(EXTENDED_LOCALES.keyOf('sk')).toBe('Slovak');
     });
   });
 
   describe('labeled enum to simple enum', () => {
-    const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-    const EXTENDED_LOCALE = Enum.extend(LOCALE, ['de']);
-    type ExtendedLocale = InferValue<typeof EXTENDED_LOCALE>;
+    const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+    const EXTENDED_LOCALES = Enum.extend(LOCALES, ['de']);
+    type ExtendedLocale = InferValue<typeof EXTENDED_LOCALES>;
 
     test('no additional properties', () => {
-      expect(EXTENDED_LOCALE).toEqual<typeof EXTENDED_LOCALE>({
+      expect(EXTENDED_LOCALES).toEqual<typeof EXTENDED_LOCALES>({
         accessor: expect.any(Object),
         values: expect.any(Function),
         hasValue: expect.any(Function),
@@ -144,7 +144,7 @@ describe('Enum.extend', () => {
     });
 
     test('values', () => {
-      expect(EXTENDED_LOCALE.values()).toEqual<ExtendedLocale[]>([
+      expect(EXTENDED_LOCALES.values()).toEqual<ExtendedLocale[]>([
         'en',
         'cs',
         'sk',
@@ -153,11 +153,11 @@ describe('Enum.extend', () => {
     });
 
     test('hasValue', () => {
-      expect(EXTENDED_LOCALE.hasValue('de')).toBe(true);
+      expect(EXTENDED_LOCALES.hasValue('de')).toBe(true);
     });
 
     test('assertValue', () => {
-      expect(() => EXTENDED_LOCALE.assertValue('de')).not.toThrowError();
+      expect(() => EXTENDED_LOCALES.assertValue('de')).not.toThrowError();
     });
   });
 });

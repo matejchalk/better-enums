@@ -67,8 +67,8 @@ Import the `Enum` callable object to create a simple enum and infer its union ty
 ```ts
 import { Enum, type InferValue } from 'better-enums';
 
-const ROLE = Enum(['viewer', 'editor', 'admin']);
-type Role = InferValue<typeof ROLE>;
+const ROLES = Enum(['viewer', 'editor', 'admin']);
+type Role = InferValue<typeof ROLES>;
 ```
 
 Then you can use the inferred type in your type definitions:
@@ -83,9 +83,9 @@ type User = {
 If you prefer an enum-style syntax for accessing values, you can use the `.accessor` property (keys match values exactly):
 
 ```ts
-const ROLE = Enum(['Viewer', 'Editor', 'Admin']);
-type Role = InferValue<typeof ROLE>;
-const Role = ROLE.accessor;
+const ROLES = Enum(['Viewer', 'Editor', 'Admin']);
+type Role = InferValue<typeof ROLES>;
+const Role = ROLES.accessor;
 
 // ...
 
@@ -100,7 +100,7 @@ The enum object enables you to use runtime features:
 - list all values with `.values()`:
 
   ```ts
-  ROLE.values().forEach(role => {
+  ROLES.values().forEach(role => {
     console.log(role);
   });
   ```
@@ -110,7 +110,7 @@ The enum object enables you to use runtime features:
   ```ts
   function f(value: string | undefined) {
     // value is string | undefined
-    if (ROLE.hasValue(value)) {
+    if (ROLES.hasValue(value)) {
       // value is Role
     }
   }
@@ -122,7 +122,7 @@ The enum object enables you to use runtime features:
   function f(value: string | undefined) {
     try {
       // value is string | undefined
-      ROLE.assertValue(value);
+      ROLES.assertValue(value);
       // value is Role
     } catch (err: unknown) {
       if (err instanceof RangeError) {
@@ -138,13 +138,13 @@ The enum object enables you to use runtime features:
 If you prefer to use something more similar to classic enums, you can provide an object instead of an array when calling `Enum`:
 
 ```ts
-const ROLE = Enum({
+const ROLES = Enum({
   Viewer: 'viewer',
   Editor: 'editor',
   Admin: 'admin',
 });
-type Role = InferValue<typeof ROLE>;
-const Role = ROLE.accessor;
+type Role = InferValue<typeof ROLES>;
+const Role = ROLES.accessor;
 ```
 
 Then you can access enum values either directly or via their key:
@@ -174,26 +174,26 @@ In addition to creating brand new enums, you can easily derive new enums from ex
 To add values to a simple enum, pass in an array of values:
 
 ```ts
-const ROLE = Enum(['viewer', 'editor', 'admin']);
+const ROLES = Enum(['viewer', 'editor', 'admin']);
 
-const ENHANCED_ROLE = Enum.extend(ROLE, ['superadmin']);
+const ENHANCED_ROLES = Enum.extend(ROLES, ['superadmin']);
 // equivalent to: Enum(['viewer', 'editor', 'admin', 'superadmin'])
 ```
 
 To add values to a labeled enum, pass in an object:
 
 ```ts
-const ROLE = Enum({
+const ROLES = Enum({
   Viewer: 'viewer',
   Editor: 'editor',
   Admin: 'admin',
 });
 
-const ENHANCED_ROLE = Enum.extend(ROLE, {
+const ENHANCED_ROLES = Enum.extend(ROLES, {
   SuperAdmin: 'superadmin',
 });
 /* equivalent to:
-const ENHANCED_ROLE = Enum({
+const ENHANCED_ROLES = Enum({
   Viewer: 'viewer',
   Editor: 'editor',
   Admin: 'admin',
@@ -205,13 +205,13 @@ const ENHANCED_ROLE = Enum({
 If you pass in an array of values for a labeled enum, the result will be a simple enum:
 
 ```ts
-const ROLE = Enum({
+const ROLES = Enum({
   Viewer: 'viewer',
   Editor: 'editor',
   Admin: 'admin',
 });
 
-const ENHANCED_ROLE = Enum.extend(ROLE, ['superadmin']);
+const ENHANCED_ROLES = Enum.extend(ROLES, ['superadmin']);
 // equivalent to: Enum(['viewer', 'editor', 'admin', 'superadmin'])
 ```
 
@@ -220,9 +220,9 @@ const ENHANCED_ROLE = Enum.extend(ROLE, ['superadmin']);
 To remove values from a simple enum, pass in an array of values:
 
 ```ts
-const ROLE = Enum(['viewer', 'editor', 'admin']);
+const ROLES = Enum(['viewer', 'editor', 'admin']);
 
-const RESTRICTED_ROLE = Enum.exclude(ROLE, ['admin']);
+const RESTRICTED_ROLES = Enum.exclude(ROLES, ['admin']);
 // equivalent to: Enum(['viewer', 'editor'])
 ```
 
@@ -231,15 +231,15 @@ To remove values from a labeled enum, you have two alternatives:
 - pass in an array of keys:
 
   ```ts
-  const ROLE = Enum({
+  const ROLES = Enum({
     Viewer: 'viewer',
     Editor: 'editor',
     Admin: 'admin',
   });
 
-  const RESTRICTED_ROLE = Enum.exclude(ROLE, ['Admin']);
+  const RESTRICTED_ROLES = Enum.exclude(ROLES, ['Admin']);
   /* equivalent to:
-  const RESTRICTED_ROLE = Enum({
+  const RESTRICTED_ROLES = Enum({
     Viewer: 'viewer',
     Editor: 'editor',
   });
@@ -249,15 +249,15 @@ To remove values from a labeled enum, you have two alternatives:
 - pass in an array of values:
 
   ```ts
-  const ROLE = Enum({
+  const ROLES = Enum({
     Viewer: 'viewer',
     Editor: 'editor',
     Admin: 'admin',
   });
 
-  const RESTRICTED_ROLE = Enum.exclude(ROLE, ['admin']);
+  const RESTRICTED_ROLES = Enum.exclude(ROLES, ['admin']);
   /* equivalent to:
-  const RESTRICTED_ROLE = Enum({
+  const RESTRICTED_ROLES = Enum({
     Viewer: 'viewer',
     Editor: 'editor',
   });
@@ -277,9 +277,9 @@ enum Role = {
   Admin = 'admin',
 }
 
-const ROLE = Enum(Role);
+const ROLES = Enum(Role);
 /* equivalent to:
-const ROLE = Enum({
+const ROLES = Enum({
   Viewer: 'viewer',
   Editor: 'editor',
   Admin: 'admin',
@@ -296,9 +296,9 @@ enum Role = {
   Admin,
 }
 
-const ROLE = Enum(Role);
+const ROLES = Enum(Role);
 /* equivalent to:
-const ROLE = Enum({
+const ROLES = Enum({
   Viewer: 0,
   Editor: 1,
   Admin: 2,

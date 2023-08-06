@@ -13,7 +13,7 @@ export interface IEnum {
    * Creates a simple enum from an array of values.
    *
    * @example
-   * const ROLE = Enum(['viewer', 'editor', 'owner']);
+   * const ROLES = Enum(['viewer', 'editor', 'owner']);
    *
    * @param values Array of all values.
    * @template T Type of values (union of strings or numbers).
@@ -25,7 +25,7 @@ export interface IEnum {
    * Creates a labeled enum from an object.
    *
    * @example
-   * const LANGUAGE = Enum({
+   * const LANGUAGES = Enum({
    *   English: 'English',
    *   Czech: 'Čeština',
    *   Slovak: 'Slovenčina',
@@ -41,8 +41,8 @@ export interface IEnum {
    * Creates a simple enum by adding values to another enum.
    *
    * @example
-   * const STATUS = Enum(['alive', 'dead']);
-   * const INFECTED_STATUS = Enum.extend(STATUS, ['zombie']);
+   * const STATUSES = Enum(['alive', 'dead']);
+   * const INFECTED_STATUSES = Enum.extend(STATUSES, ['zombie']);
    *
    * @param srcEnum Source enum object (simple or labeled).
    * @param extraValues Values to be added.
@@ -59,8 +59,8 @@ export interface IEnum {
    * Creates a labeled enum by adding keys and values to another enum.
    *
    * @example
-   * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-   * const EXTENDED_LOCALE = Enum.extend(LOCALE, { Spanish: 'es' });
+   * const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+   * const EXTENDED_LOCALES = Enum.extend(LOCALES, { Spanish: 'es' });
    *
    * @param srcEnum Source labeled enum object.
    * @param extraObj Object with key-value pairs to be added.
@@ -77,8 +77,8 @@ export interface IEnum {
    * Creates a labeled enum by removing keys from another enum.
    *
    * @example
-   * const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
-   * const ERROR_LEVEL = Enum.exclude(LEVEL, ['off']);
+   * const LEVELS = Enum({ off: 0, warn: 1, error: 2 });
+   * const ERROR_LEVELS = Enum.exclude(LEVELS, ['off']);
    *
    * @param srcEnum Source labeled enum object.
    * @param keys Array of keys to remove.
@@ -95,8 +95,8 @@ export interface IEnum {
    * Creates a labeled enum by removing values from another enum.
    *
    * @example
-   * const LEVEL = Enum({ off: 0, warn: 1, error: 2 });
-   * const ERROR_LEVEL = Enum.exclude(LEVEL, [0]);
+   * const LEVELS = Enum({ off: 0, warn: 1, error: 2 });
+   * const ERROR_LEVELS = Enum.exclude(LEVELS, [0]);
    *
    * @param srcEnum Source labeled enum object.
    * @param values Array of values to remove.
@@ -113,8 +113,8 @@ export interface IEnum {
    * Creates a simple enum by removing values from another enum.
    *
    * @example
-   * const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
-   * const SETTLED_STATUS = Enum.exclude(STATUS, ['pending']);
+   * const STATUSES = Enum(['pending', 'fulfilled', 'rejected']);
+   * const SETTLED_STATUSES = Enum.exclude(STATUSES, ['pending']);
    *
    * @param srcEnum Source simple enum object.
    * @param values Array of values to remove.
@@ -143,8 +143,8 @@ export type SimpleEnum<T extends EnumPrimitive> = {
    * Unlike with labeled enums, a key and its value will always be exactly the same.
    *
    * @example
-   * const STATUS = Enum(['pending', 'fulfilled', 'rejected']);
-   * const Status = STATUS.accessor;
+   * const STATUSES = Enum(['pending', 'fulfilled', 'rejected']);
+   * const Status = STATUSES.accessor;
    *
    * const status = Status.pending; // status is 'pending'
    */
@@ -186,8 +186,8 @@ export type LabeledEnum<T extends EnumSourceObject> = {
    * Can be used for accessing values by keys using dot syntax.
    *
    * @example
-   * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
-   * const Locale = LOCALE.accessor;
+   * const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+   * const Locale = LOCALES.accessor;
    *
    * const locale = Locale.Czech; // locale is 'cs'
    */
@@ -258,11 +258,11 @@ export type LabeledEnum<T extends EnumSourceObject> = {
  * Utility type to infer type of value for a simple or labeled enum.
  *
  * @example
- * const STATUS = Enum(['on', 'off']);
- * type Status = InferValue<typeof STATUS>; // Status is 'on' | 'off'
+ * const STATUSES = Enum(['on', 'off']);
+ * type Status = InferValue<typeof STATUSES>; // Status is 'on' | 'off'
  *
- * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
- * type Locale = InferValue<typeof LOCALE>; // Locale is 'en' | 'cs' | 'sk'
+ * const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+ * type Locale = InferValue<typeof LOCALES>; // Locale is 'en' | 'cs' | 'sk'
  *
  * @template T Type of simple enum or labeled enum.
  */
@@ -274,8 +274,8 @@ export type InferValue<T extends AnySimpleEnum | AnyLabeledEnum> = EnumToUnion<
  * Utility type to infer type of key for a labeled enum.
  *
  * @example
- * const LOCALE = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
- * type LocaleKey = InferKey<typeof LOCALE>; // Locale is 'English' | 'Czech' | 'Slovak'
+ * const LOCALES = Enum({ English: 'en', Czech: 'cs', Slovak: 'sk' });
+ * type LocaleKey = InferKey<typeof LOCALES>; // Locale is 'English' | 'Czech' | 'Slovak'
  *
  * @template T Type of labeled enum.
  */

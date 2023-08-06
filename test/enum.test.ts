@@ -7,11 +7,11 @@ describe('Enum', () => {
   });
 
   describe('simple enum', () => {
-    const ROLE = Enum(['viewer', 'editor', 'owner']);
-    type Role = InferValue<typeof ROLE>;
+    const ROLES = Enum(['viewer', 'editor', 'owner']);
+    type Role = InferValue<typeof ROLES>;
 
     test('accessor', () => {
-      expect(ROLE.accessor).toEqual({
+      expect(ROLES.accessor).toEqual({
         viewer: 'viewer',
         editor: 'editor',
         owner: 'owner',
@@ -19,33 +19,33 @@ describe('Enum', () => {
     });
 
     test('values', () => {
-      expect(ROLE.values()).toEqual<Role[]>(['viewer', 'editor', 'owner']);
+      expect(ROLES.values()).toEqual<Role[]>(['viewer', 'editor', 'owner']);
     });
 
     test('hasValue', () => {
-      expect(ROLE.hasValue('editor')).toBe(true);
-      expect(ROLE.hasValue('admin')).toBe(false);
-      expect(ROLE.hasValue(null)).toBe(false);
+      expect(ROLES.hasValue('editor')).toBe(true);
+      expect(ROLES.hasValue('admin')).toBe(false);
+      expect(ROLES.hasValue(null)).toBe(false);
     });
 
     test('assertValue', () => {
-      expect(() => ROLE.assertValue('owner')).not.toThrow();
-      expect(() => ROLE.assertValue(0)).toThrowError(
+      expect(() => ROLES.assertValue('owner')).not.toThrow();
+      expect(() => ROLES.assertValue(0)).toThrowError(
         'Enum value out of range (received 0, expected one of: "viewer", "editor", "owner")'
       );
     });
   });
 
   describe('labeled enum', () => {
-    const LANGUAGE = Enum({
+    const LANGUAGES = Enum({
       en: 'English',
       cs: 'Čeština',
       es: 'Español',
     });
-    type Language = InferValue<typeof LANGUAGE>;
+    type Language = InferValue<typeof LANGUAGES>;
 
     test('accessor', () => {
-      expect(LANGUAGE.accessor).toEqual({
+      expect(LANGUAGES.accessor).toEqual({
         en: 'English',
         cs: 'Čeština',
         es: 'Español',
@@ -53,7 +53,7 @@ describe('Enum', () => {
     });
 
     test('values', () => {
-      expect(LANGUAGE.values()).toEqual<Language[]>([
+      expect(LANGUAGES.values()).toEqual<Language[]>([
         'English',
         'Čeština',
         'Español',
@@ -61,15 +61,15 @@ describe('Enum', () => {
     });
 
     test('hasValue', () => {
-      expect(LANGUAGE.hasValue('Español')).toBe(true);
+      expect(LANGUAGES.hasValue('Español')).toBe(true);
     });
 
     test('assertValue', () => {
-      expect(() => LANGUAGE.assertValue('Español')).not.toThrowError();
+      expect(() => LANGUAGES.assertValue('Español')).not.toThrowError();
     });
 
     test('keys', () => {
-      expect(LANGUAGE.keys()).toEqual<ReturnType<(typeof LANGUAGE)['keys']>>([
+      expect(LANGUAGES.keys()).toEqual<ReturnType<(typeof LANGUAGES)['keys']>>([
         'en',
         'cs',
         'es',
@@ -77,20 +77,20 @@ describe('Enum', () => {
     });
 
     test('hasKey', () => {
-      expect(LANGUAGE.hasKey('cs')).toBe(true);
-      expect(LANGUAGE.hasKey('Español')).toBe(false);
+      expect(LANGUAGES.hasKey('cs')).toBe(true);
+      expect(LANGUAGES.hasKey('Español')).toBe(false);
     });
 
     test('assertKey', () => {
-      expect(() => LANGUAGE.assertKey('es')).not.toThrowError();
-      expect(() => LANGUAGE.assertKey(undefined)).toThrowError(
+      expect(() => LANGUAGES.assertKey('es')).not.toThrowError();
+      expect(() => LANGUAGES.assertKey(undefined)).toThrowError(
         `Enum key out of range (received undefined, expected one of: "en", "cs", "es")`
       );
     });
 
     test('entries', () => {
-      expect(LANGUAGE.entries()).toEqual<
-        ReturnType<(typeof LANGUAGE)['entries']>
+      expect(LANGUAGES.entries()).toEqual<
+        ReturnType<(typeof LANGUAGES)['entries']>
       >([
         ['en', 'English'],
         ['cs', 'Čeština'],
@@ -99,26 +99,26 @@ describe('Enum', () => {
     });
 
     test('hasEntry', () => {
-      expect(LANGUAGE.hasEntry(['cs', 'Español'])).toBe(false);
-      expect(LANGUAGE.hasEntry(['es', 'Español'])).toBe(true);
+      expect(LANGUAGES.hasEntry(['cs', 'Español'])).toBe(false);
+      expect(LANGUAGES.hasEntry(['es', 'Español'])).toBe(true);
     });
 
     test('assertEntry', () => {
-      expect(() => LANGUAGE.assertEntry(['en', 'English'])).not.toThrowError();
-      expect(() => LANGUAGE.assertEntry(['de', 'Español'])).toThrowError(
+      expect(() => LANGUAGES.assertEntry(['en', 'English'])).not.toThrowError();
+      expect(() => LANGUAGES.assertEntry(['de', 'Español'])).toThrowError(
         'Enum key out of range (received "de", expected one of: "en", "cs", "es")'
       );
-      expect(() => LANGUAGE.assertEntry(['cs', 'Español'])).toThrowError(
+      expect(() => LANGUAGES.assertEntry(['cs', 'Español'])).toThrowError(
         'Enum key and value don\'t match (expected ["cs", "Čeština"] or ["es", "Español"])'
       );
-      expect(() => LANGUAGE.assertEntry(['es'])).toThrowError(
+      expect(() => LANGUAGES.assertEntry(['es'])).toThrowError(
         'Enum entry must be a tuple (e.g. ["key", "value"])'
       );
     });
 
     test('keyOf', () => {
-      expect(LANGUAGE.keyOf('English')).toBe('en');
-      expect(LANGUAGE.keyOf('Español')).toBe('es');
+      expect(LANGUAGES.keyOf('English')).toBe('en');
+      expect(LANGUAGES.keyOf('Español')).toBe('es');
     });
   });
 
@@ -127,50 +127,50 @@ describe('Enum', () => {
       Allow = 'allow',
       Block = 'block',
     }
-    const ACTION = Enum(Action);
+    const ACTIONS = Enum(Action);
 
     test('accessor', () => {
-      expect(ACTION.accessor).toEqual({
+      expect(ACTIONS.accessor).toEqual({
         Allow: 'allow',
         Block: 'block',
       });
     });
 
     test('values', () => {
-      expect(ACTION.values()).toEqual<InferValue<typeof ACTION>[]>([
+      expect(ACTIONS.values()).toEqual<InferValue<typeof ACTIONS>[]>([
         'allow',
         'block',
       ]);
     });
 
     test('hasValue', () => {
-      expect(ACTION.hasValue(Action.Block)).toBe(true);
-      expect(ACTION.hasValue('block')).toBe(true);
-      expect(ACTION.hasValue('Block')).toBe(false);
+      expect(ACTIONS.hasValue(Action.Block)).toBe(true);
+      expect(ACTIONS.hasValue('block')).toBe(true);
+      expect(ACTIONS.hasValue('Block')).toBe(false);
     });
 
     test('keys', () => {
-      expect(ACTION.keys()).toEqual<(keyof typeof Action)[]>([
+      expect(ACTIONS.keys()).toEqual<(keyof typeof Action)[]>([
         'Allow',
         'Block',
       ]);
     });
 
     test('hasKey', () => {
-      expect(ACTION.hasKey('Allow')).toBe(true);
-      expect(ACTION.hasKey('allow')).toBe(false);
+      expect(ACTIONS.hasKey('Allow')).toBe(true);
+      expect(ACTIONS.hasKey('allow')).toBe(false);
     });
 
     test('entries', () => {
-      expect(ACTION.entries()).toEqual<[keyof typeof Action, `${Action}`][]>([
+      expect(ACTIONS.entries()).toEqual<[keyof typeof Action, `${Action}`][]>([
         ['Allow', 'allow'],
         ['Block', 'block'],
       ]);
     });
 
     test('keyOf', () => {
-      expect(ACTION.keyOf(Action.Allow)).toEqual('Allow');
-      expect(ACTION.keyOf('block')).toEqual('Block');
+      expect(ACTIONS.keyOf(Action.Allow)).toEqual('Allow');
+      expect(ACTIONS.keyOf('block')).toEqual('Block');
     });
   });
 
@@ -180,21 +180,21 @@ describe('Enum', () => {
       warn,
       error,
     }
-    const LEVEL = Enum(Level);
+    const LEVELS = Enum(Level);
 
     test('values', () => {
-      expect(LEVEL.values()).toEqual<Level[]>([0, 1, 2]);
+      expect(LEVELS.values()).toEqual<Level[]>([0, 1, 2]);
     });
 
     test('hasValue', () => {
-      expect(LEVEL.hasValue(Level.warn)).toBe(true);
-      expect(LEVEL.hasValue('warn')).toBe(false);
-      expect(LEVEL.hasValue(1)).toBe(true);
-      expect(LEVEL.hasValue(3)).toBe(false);
+      expect(LEVELS.hasValue(Level.warn)).toBe(true);
+      expect(LEVELS.hasValue('warn')).toBe(false);
+      expect(LEVELS.hasValue(1)).toBe(true);
+      expect(LEVELS.hasValue(3)).toBe(false);
     });
 
     test('keys', () => {
-      expect(LEVEL.keys()).toEqual<(keyof typeof Level)[]>([
+      expect(LEVELS.keys()).toEqual<(keyof typeof Level)[]>([
         'off',
         'warn',
         'error',
@@ -202,8 +202,8 @@ describe('Enum', () => {
     });
 
     test('keyOf', () => {
-      expect(LEVEL.keyOf(2)).toEqual('error');
-      expect(LEVEL.keyOf(Level.warn)).toEqual('warn');
+      expect(LEVELS.keyOf(2)).toEqual('error');
+      expect(LEVELS.keyOf(Level.warn)).toEqual('warn');
     });
   });
 });

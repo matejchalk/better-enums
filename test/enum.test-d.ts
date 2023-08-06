@@ -2,25 +2,25 @@ import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
 import { Enum, InferKey, InferValue, SimpleEnum } from '../src';
 
 test('simple enum', () => {
-  const ROLE = Enum(['viewer', 'editor', 'owner']);
-  type Role = InferValue<typeof ROLE>;
-  const Role = ROLE.accessor;
+  const ROLES = Enum(['viewer', 'editor', 'owner']);
+  type Role = InferValue<typeof ROLES>;
+  const Role = ROLES.accessor;
 
   void function (role: Role) {
     expectType<'viewer' | 'editor' | 'owner'>(role);
   };
 
-  expectType<('viewer' | 'editor' | 'owner')[]>(ROLE.values());
+  expectType<('viewer' | 'editor' | 'owner')[]>(ROLES.values());
 
   void function (possibleRole: string) {
     expectNotAssignable<Role>(possibleRole);
-    if (ROLE.hasValue(possibleRole)) {
+    if (ROLES.hasValue(possibleRole)) {
       expectType<Role>(possibleRole);
     }
 
     // assert function requires every identifier in the call chain to have an explicit type annotation
-    const ROLE_EXPLICIT: SimpleEnum<Role> = ROLE;
-    ROLE_EXPLICIT.assertValue(possibleRole);
+    const ROLES_EXPLICIT: SimpleEnum<Role> = ROLES;
+    ROLES_EXPLICIT.assertValue(possibleRole);
     expectType<Role>(possibleRole);
   };
 
@@ -32,23 +32,23 @@ test('simple enum', () => {
 });
 
 test('labeled enum', () => {
-  const LANGUAGE = Enum({
+  const LANGUAGES = Enum({
     en: 'English',
     cs: 'Čeština',
     es: 'Español',
   });
-  type Language = InferValue<typeof LANGUAGE>;
-  const Language = LANGUAGE.accessor;
+  type Language = InferValue<typeof LANGUAGES>;
+  const Language = LANGUAGES.accessor;
 
   void function (language: Language) {
     expectType<'English' | 'Čeština' | 'Español'>(language);
   };
 
-  void function (label: InferKey<typeof LANGUAGE>) {
+  void function (label: InferKey<typeof LANGUAGES>) {
     expectType<'en' | 'cs' | 'es'>(label);
   };
 
-  expectType<('English' | 'Čeština' | 'Español')[]>(LANGUAGE.values());
+  expectType<('English' | 'Čeština' | 'Español')[]>(LANGUAGES.values());
 
   expectType<
     Readonly<{
@@ -60,12 +60,12 @@ test('labeled enum', () => {
 
   expectType<'Čeština'>(Language.cs);
 
-  LANGUAGE.entries().forEach(([key, value]) => {
+  LANGUAGES.entries().forEach(([key, value]) => {
     expectType<'en' | 'cs' | 'es'>(key);
     expectType<'English' | 'Čeština' | 'Español'>(value);
   });
 
-  expectType<'es'>(LANGUAGE.keyOf('Español'));
+  expectType<'es'>(LANGUAGES.keyOf('Español'));
 });
 
 test('from TypeScript string enum', () => {
@@ -74,14 +74,14 @@ test('from TypeScript string enum', () => {
     Block = 'block',
   }
 
-  const ACTION = Enum(ActionEnum);
-  type Action = InferValue<typeof ACTION>;
+  const ACTIONS = Enum(ActionEnum);
+  type Action = InferValue<typeof ACTIONS>;
 
   void function (action: Action) {
     expectType<'allow' | 'block'>(action);
   };
 
-  expectAssignable<readonly ActionEnum[]>(ACTION.values());
+  expectAssignable<readonly ActionEnum[]>(ACTIONS.values());
 
   void function (action: 'allow') {
     expectAssignable<Action>(action);
@@ -91,7 +91,7 @@ test('from TypeScript string enum', () => {
     expectNotAssignable<Action>(invalidAction);
   };
 
-  expect<'Block'>(ACTION.keyOf('block'));
+  expect<'Block'>(ACTIONS.keyOf('block'));
 });
 
 test('from TypeScript number enum', () => {
@@ -101,8 +101,8 @@ test('from TypeScript number enum', () => {
     error,
   }
 
-  const LEVEL = Enum(LevelEnum);
-  type Level = InferValue<typeof LEVEL>;
+  const LEVELS = Enum(LevelEnum);
+  type Level = InferValue<typeof LEVELS>;
 
   void function (level: 1) {
     expectAssignable<Level>(level);
@@ -112,5 +112,5 @@ test('from TypeScript number enum', () => {
     expectNotAssignable<Level>(invalidLevel);
   };
 
-  expectType<'warn'>(LEVEL.keyOf(1));
+  expectType<'warn'>(LEVELS.keyOf(1));
 });
