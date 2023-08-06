@@ -266,9 +266,9 @@ export type LabeledEnum<T extends EnumSourceObject> = {
  *
  * @template T Type of simple enum or labeled enum.
  */
-export type InferValue<T extends AnySimpleEnum | AnyLabeledEnum> = EnumToUnion<
-  ReturnType<T['values']>[number]
->;
+export type InferValue<
+  T extends Pick<AnySimpleEnum | AnyLabeledEnum, 'values'>
+> = EnumToUnion<ReturnType<T['values']>[number]>;
 
 /**
  * Utility type to infer type of key for a labeled enum.
@@ -279,7 +279,7 @@ export type InferValue<T extends AnySimpleEnum | AnyLabeledEnum> = EnumToUnion<
  *
  * @template T Type of labeled enum.
  */
-export type InferKey<T extends AnyLabeledEnum> = EnumToUnion<
+export type InferKey<T extends Pick<AnyLabeledEnum, 'keys'>> = EnumToUnion<
   ReturnType<T['keys']>[number]
 >;
 

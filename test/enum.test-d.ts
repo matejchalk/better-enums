@@ -29,6 +29,13 @@ test('simple enum', () => {
     readonly editor: 'editor';
     readonly owner: 'owner';
   }>(Role);
+
+  const PAGE_SIZES = Enum([10, 20, 50]);
+  type PageSize = InferValue<typeof PAGE_SIZES>;
+
+  void function (pageSize: PageSize) {
+    expectType<10 | 20 | 50>(pageSize);
+  };
 });
 
 test('labeled enum', () => {
