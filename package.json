@@ -23,6 +23,7 @@
   "homepage": "https://matejchalk.github.io/better-enums/",
   "scripts": {
     "prepublishOnly": "npm test && npm run build",
+    "prepare": "husky install",
     "build": "tsup",
     "test": "jest",
     "docs": "typedoc",
@@ -43,6 +44,7 @@
     "ts-jest": "^29.1.1",
     "tsup": "^7.1.0",
     "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "husky": "^8.0.0"
   }
 }
