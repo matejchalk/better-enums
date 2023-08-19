@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/matejchalk/better-enums/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/matejchalk/better-enums/actions/workflows/ci.yml?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/matejchalk/better-enums/branch/main/graph/badge.svg?token=PYFUHMSYXU)](https://codecov.io/gh/matejchalk/better-enums)
+[![bundle size](https://badges.hiptest.com:/bundlephobia/minzip/better-enums)](https://bundlephobia.com/package/better-enums)
 
 **Better enums for TypeScript.**
 
