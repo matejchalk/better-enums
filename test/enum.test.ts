@@ -1,11 +1,6 @@
-import { expectTypeTestsToPassAsync } from 'jest-tsd';
 import { Enum, InferValue } from '../src';
 
 describe('Enum', () => {
-  test('TSD static type checks', async () => {
-    await expectTypeTestsToPassAsync(__filename);
-  });
-
   describe('simple enum', () => {
     const ROLES = Enum(['viewer', 'editor', 'owner']);
     type Role = InferValue<typeof ROLES>;

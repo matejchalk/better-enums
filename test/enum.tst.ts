@@ -1,4 +1,4 @@
-import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
+import { expect, test } from 'tstyche';
 import { Enum, InferKey, InferValue, SimpleEnum } from '../src';
 
 test('simple enum', () => {
@@ -7,34 +7,34 @@ test('simple enum', () => {
   const Role = ROLES.accessor;
 
   void function (role: Role) {
-    expectType<'viewer' | 'editor' | 'owner'>(role);
+    expect(role).type.toEqual<'viewer' | 'editor' | 'owner'>();
   };
 
-  expectType<('viewer' | 'editor' | 'owner')[]>(ROLES.values());
+  expect(ROLES.values()).type.toEqual<('viewer' | 'editor' | 'owner')[]>();
 
   void function (possibleRole: string) {
-    expectNotAssignable<Role>(possibleRole);
+    expect<Role>().type.not.toBeAssignable(possibleRole);
     if (ROLES.hasValue(possibleRole)) {
-      expectType<Role>(possibleRole);
+      expect(possibleRole).type.toEqual<Role>();
     }
 
     // assert function requires every identifier in the call chain to have an explicit type annotation
     const ROLES_EXPLICIT: SimpleEnum<Role> = ROLES;
     ROLES_EXPLICIT.assertValue(possibleRole);
-    expectType<Role>(possibleRole);
+    expect(possibleRole).type.toEqual<Role>();
   };
 
-  expectType<{
+  expect(Role).type.toEqual<{
     readonly viewer: 'viewer';
     readonly editor: 'editor';
     readonly owner: 'owner';
-  }>(Role);
+  }>();
 
   const PAGE_SIZES = Enum([10, 20, 50]);
   type PageSize = InferValue<typeof PAGE_SIZES>;
 
   void function (pageSize: PageSize) {
-    expectType<10 | 20 | 50>(pageSize);
+    expect(pageSize).type.toEqual<10 | 20 | 50>();
   };
 });
 
@@ -48,31 +48,33 @@ test('labeled enum', () => {
   const Language = LANGUAGES.accessor;
 
   void function (language: Language) {
-    expectType<'English' | 'Čeština' | 'Español'>(language);
+    expect(language).type.toEqual<'English' | 'Čeština' | 'Español'>();
   };
 
   void function (label: InferKey<typeof LANGUAGES>) {
-    expectType<'en' | 'cs' | 'es'>(label);
+    expect(label).type.toEqual<'en' | 'cs' | 'es'>();
   };
 
-  expectType<('English' | 'Čeština' | 'Español')[]>(LANGUAGES.values());
+  expect(LANGUAGES.values()).type.toEqual<
+    ('English' | 'Čeština' | 'Español')[]
+  >();
 
-  expectType<
+  expect(Language).type.toEqual<
     Readonly<{
       en: 'English';
       cs: 'Čeština';
       es: 'Español';
     }>
-  >(Language);
+  >();
 
-  expectType<'Čeština'>(Language.cs);
+  expect(Language.cs).type.toEqual<'Čeština'>();
 
   LANGUAGES.entries().forEach(([key, value]) => {
-    expectType<'en' | 'cs' | 'es'>(key);
-    expectType<'English' | 'Čeština' | 'Español'>(value);
+    expect(key).type.toEqual<'en' | 'cs' | 'es'>();
+    expect(value).type.toEqual<'English' | 'Čeština' | 'Español'>();
   });
 
-  expectType<'es'>(LANGUAGES.keyOf('Español'));
+  expect(LANGUAGES.keyOf('Español')).type.toEqual<'es'>();
 });
 
 test('from TypeScript string enum', () => {
@@ -85,20 +87,20 @@ test('from TypeScript string enum', () => {
   type Action = InferValue<typeof ACTIONS>;
 
   void function (action: Action) {
-    expectType<'allow' | 'block'>(action);
+    expect(action).type.toEqual<'allow' | 'block'>();
   };
 
-  expectAssignable<readonly ActionEnum[]>(ACTIONS.values());
+  expect<readonly ActionEnum[]>().type.toBeAssignable(ACTIONS.values());
 
   void function (action: 'allow') {
-    expectAssignable<Action>(action);
+    expect<Action>().type.toBeAssignable(action);
   };
 
   void function (invalidAction: 'allowed') {
-    expectNotAssignable<Action>(invalidAction);
+    expect<Action>().type.not.toBeAssignable(invalidAction);
   };
 
-  expect<'Block'>(ACTIONS.keyOf('block'));
+  expect<'Block'>().type.toBeAssignable(ACTIONS.keyOf('block'));
 });
 
 test('from TypeScript number enum', () => {
@@ -112,12 +114,12 @@ test('from TypeScript number enum', () => {
   type Level = InferValue<typeof LEVELS>;
 
   void function (level: 1) {
-    expectAssignable<Level>(level);
+    expect<Level>().type.toBeAssignable(level);
   };
 
   void function (invalidLevel: 3) {
-    expectNotAssignable<Level>(invalidLevel);
+    expect<Level>().type.not.toBeAssignable(invalidLevel);
   };
 
-  expectType<'warn'>(LEVELS.keyOf(1));
+  expect(LEVELS.keyOf(1)).type.toEqual<'warn'>();
 });
