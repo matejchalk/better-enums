@@ -1,11 +1,6 @@
-import { expectTypeTestsToPassAsync } from 'jest-tsd';
 import { Enum, InferKey, InferValue } from '../src';
 
 describe('Enum.extend', () => {
-  test('TSD static type checks', async () => {
-    await expectTypeTestsToPassAsync(__filename);
-  });
-
   describe('simple enum', () => {
     const STATUSES = Enum(['alive', 'dead']);
     const INFECTED_STATUSES = Enum.extend(STATUSES, ['zombie']);

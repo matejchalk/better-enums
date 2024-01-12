@@ -1,4 +1,4 @@
-import { expectAssignable, expectNotAssignable, expectType } from 'jest-tsd';
+import { expect, test } from 'tstyche';
 import { Enum, InferKey, InferValue, LabeledEnum, SimpleEnum } from '../src';
 
 test('simple enum', () => {
@@ -6,25 +6,29 @@ test('simple enum', () => {
   const INFECTED_STATUSES = Enum.extend(STATUSES, ['zombie']);
   type InfectedStatus = InferValue<typeof INFECTED_STATUSES>;
 
-  expectType<SimpleEnum<'alive' | 'dead' | 'zombie'>>(INFECTED_STATUSES);
+  expect(INFECTED_STATUSES).type.toEqual<
+    SimpleEnum<'alive' | 'dead' | 'zombie'>
+  >();
 
   void function (status: InfectedStatus) {
-    expectType<'alive' | 'dead' | 'zombie'>(status);
+    expect(status).type.toEqual<'alive' | 'dead' | 'zombie'>();
   };
 
-  expectType<('alive' | 'dead' | 'zombie')[]>(INFECTED_STATUSES.values());
+  expect(INFECTED_STATUSES.values()).type.toEqual<
+    ('alive' | 'dead' | 'zombie')[]
+  >();
 
   void function (status: 'zombie' | 'werewolf') {
     if (INFECTED_STATUSES.hasValue(status)) {
-      expectType<'zombie'>(status);
+      expect(status).type.toEqual<'zombie'>();
     }
   };
 
   void function (status: InferValue<typeof STATUSES>) {
-    expectAssignable<InfectedStatus>(status);
+    expect<InfectedStatus>().type.toBeAssignable(status);
   };
 
-  expectType<typeof STATUSES>(Enum.extend(STATUSES, []));
+  expect(Enum.extend(STATUSES, [])).type.toEqual(STATUSES);
 });
 
 test('labeled enum', () => {
@@ -32,28 +36,28 @@ test('labeled enum', () => {
   const EXTENDED_LOCALES = Enum.extend(LOCALES, { German: 'de' });
   type ExtendedLocale = InferValue<typeof EXTENDED_LOCALES>;
 
-  expectType<
+  expect(EXTENDED_LOCALES).type.toEqual<
     LabeledEnum<{
       readonly English: 'en';
       readonly Czech: 'cs';
       readonly Slovak: 'sk';
       readonly German: 'de';
     }>
-  >(EXTENDED_LOCALES);
+  >();
 
   void function (locale: ExtendedLocale) {
-    expectType<'en' | 'cs' | 'sk' | 'de'>(locale);
+    expect(locale).type.toEqual<'en' | 'cs' | 'sk' | 'de'>();
   };
 
   void function (label: InferKey<typeof EXTENDED_LOCALES>) {
-    expectType<'English' | 'Czech' | 'Slovak' | 'German'>(label);
+    expect(label).type.toEqual<'English' | 'Czech' | 'Slovak' | 'German'>();
   };
 
   void function (locale: InferValue<typeof LOCALES>) {
-    expectAssignable<ExtendedLocale>(locale);
+    expect<ExtendedLocale>().type.toBeAssignable(locale);
   };
 
-  expectType<typeof LOCALES>(Enum.extend(LOCALES, {}));
+  expect(Enum.extend(LOCALES, {})).type.toEqual(LOCALES);
 });
 
 test('labeled enum to simple enum', () => {
@@ -61,14 +65,18 @@ test('labeled enum to simple enum', () => {
   const EXTENDED_LOCALES = Enum.extend(LOCALES, ['de']);
   type ExtendedLocale = InferValue<typeof EXTENDED_LOCALES>;
 
-  expectType<SimpleEnum<'en' | 'cs' | 'sk' | 'de'>>(EXTENDED_LOCALES);
+  expect(EXTENDED_LOCALES).type.toEqual<
+    SimpleEnum<'en' | 'cs' | 'sk' | 'de'>
+  >();
 
   void function (locale: ExtendedLocale) {
-    expectType<'en' | 'cs' | 'sk' | 'de'>(locale);
+    expect(locale).type.toEqual<'en' | 'cs' | 'sk' | 'de'>();
   };
 
-  expectNotAssignable<LabeledEnum<any>>(EXTENDED_LOCALES);
+  expect<LabeledEnum<any>>().type.not.toBeAssignable(EXTENDED_LOCALES);
 
-  expectType<SimpleEnum<InferValue<typeof LOCALES>>>(Enum.extend(LOCALES, []));
-  expectNotAssignable<typeof LOCALES>(Enum.extend(LOCALES, []));
+  expect(Enum.extend(LOCALES, [])).type.toEqual<
+    SimpleEnum<InferValue<typeof LOCALES>>
+  >();
+  expect(LOCALES).type.not.toBeAssignable(Enum.extend(LOCALES, []));
 });

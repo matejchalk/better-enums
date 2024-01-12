@@ -1,11 +1,6 @@
-import { expectTypeTestsToPassAsync } from 'jest-tsd';
 import { Enum, InferValue } from '../src';
 
 describe('Enum.exclude', () => {
-  test('TSD static type checks', async () => {
-    await expectTypeTestsToPassAsync(__filename);
-  });
-
   describe('simple enum', () => {
     const STATUSES = Enum(['pending', 'fulfilled', 'rejected']);
     const SETTLED_STATUSES = Enum.exclude(STATUSES, ['pending']);
