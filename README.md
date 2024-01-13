@@ -313,6 +313,7 @@ For numeric enums, the `Enum` function takes care of excluding the reverse mappi
 ## Contributing
 
 - install dependencies using `npm install`,
-- run tests (written with Jest and TSD) using `npm test`,
+- run tests (written with Jest) using `npm test`,
+- run type tests (written with TSTyche) using `npm run test:types`,
 - build library using `npm run build`,
 - generate documentation (with TypeDoc) using `npm run docs`.
