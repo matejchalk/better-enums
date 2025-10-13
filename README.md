@@ -273,7 +273,7 @@ If you're stuck with some built-in TypeScript `enum`s in your project (e.g. from
 #### Convert a built-in string `enum`
 
 ```ts
-enum Role = {
+enum Role {
   Viewer = 'viewer',
   Editor = 'editor',
   Admin = 'admin',
@@ -292,7 +292,7 @@ const ROLES = Enum({
 #### Convert a built-in number `enum`
 
 ```ts
-enum Role = {
+enum Role {
   Viewer,
   Editor,
   Admin,
