@@ -1,2 +1,4 @@
 allowBuilds:
   esbuild: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 129600 # 90 days in minutes
