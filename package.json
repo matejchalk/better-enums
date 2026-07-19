@@ -30,7 +30,7 @@
   },
   "homepage": "https://matejchalk.github.io/better-enums/",
   "scripts": {
-    "prepublishOnly": "npm test && npm run build",
+    "prepublishOnly": "pnpm test && pnpm run build",
     "prepare": "husky install",
     "build": "tsup",
     "test": "jest",

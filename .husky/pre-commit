@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm test
-npm run docs
+pnpm test
+pnpm run docs
 git add docs/
