@@ -38,7 +38,7 @@
     "docs": "typedoc",
     "release": "release-it"
   },
-  "author": "Matěj Chalk <matejchalk@gmail.com>",
+  "author": "Matěj Chalk <dev@matejchalk.cz>",
   "license": "MIT",
   "peerDependencies": {
     "typescript": "^5.0.0"
